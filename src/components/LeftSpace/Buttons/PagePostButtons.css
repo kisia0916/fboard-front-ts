@@ -1,0 +1,17 @@
+.PagePostButton{
+    width: 78%;
+    max-width: 350px;
+    height: 48px;
+    margin-top: 50px;
+    margin-left: 25px;
+    border-radius: 50px;
+    display: flex;
+    background-color: #edff49;
+
+}
+.PagePostText{
+    margin: auto;
+    font-size: 130%;
+    color: #3c414d;
+    /* font-weight: bold; */
+}

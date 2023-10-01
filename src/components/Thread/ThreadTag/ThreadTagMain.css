@@ -1,0 +1,20 @@
+.ThreadTagMain{
+    height: 26px;
+    margin-top: 22px;
+    background-color: #353845;
+    margin-right: 25px;
+    border-radius: 50px;
+    display: flex;
+}
+.ThreadMainTagIcon{
+    color: #edff49;
+    margin-left: 6px;
+    margin-top: 4px;
+}
+.ThreadMainTagText{
+    color: white;
+    font-size: 80%;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 10px;
+}

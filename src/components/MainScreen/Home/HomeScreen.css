@@ -1,0 +1,43 @@
+.MainScreen{
+    width: calc(100% - 290px - 360px);
+    /* min-width: 600px; */
+    height: 100vh;
+    /* background-color: red; */
+    /* border-left: solid #373946 1px;
+    border-right: solid #373946 1px; */
+    border-left: solid #3d3f4d 1px;
+    border-right: solid #3d3f4d 1px;
+
+}
+.MainScreenTop{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    /* background-color: #2a2c3aac */
+    border-bottom: solid #3d3f4d 1px;
+    border-bottom: solid 1px #4e5363;
+
+    /* margin-bottom:20px; */
+}
+.MainScreenTitle{
+    color: white;
+    margin: auto;
+    font-size: 180%;
+}
+
+.MainScreenTopTexts{
+    margin: auto;
+    display: flex;
+}
+.MainScreenIcon{
+    margin-top: 4px;
+    margin-right: 8px;
+    color: white;
+}
+.MainScreenMainWarpp{
+    height: calc(100vh - 48px);
+    overflow-y:auto;
+}
+.MainScreenMainWarpp::-webkit-scrollbar{
+    display: none;
+  }

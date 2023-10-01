@@ -1,0 +1,43 @@
+.HomeScreenCreateMain{
+    width: 100%;
+    height: 90px;
+    border-bottom: solid 1px #4e5363;
+    display: flex;
+}
+.HomeScreenCreateUserIcon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-top: 18px;
+    margin-left: 45px;
+}
+.HomeScreenCreateBox{
+    width: calc(100% - 98px - 120px - 100px);
+    height: 52px;
+    margin-top: 18px;
+    margin-left: 20px;
+    border-radius: 50px;
+    background-color: #353845;
+    display: flex;
+}
+.HomeScreenCreateSendButton{
+    width: 160px;
+    height: 50px;
+    background-color: #edff48;
+    margin-top: 19px;
+    margin-left: 13px;
+    border-radius: 50px;
+    border: none;
+}
+.HomeScreenCreateSendButtonText{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-size: 150%;
+    font-weight: bolder;
+    color: #3c414d;
+}
+.HomeScreenCreateBoxText{
+    font-size: 140%;
+    margin-top: 9px;
+    margin-left: 30px;
+    color: #edff4987;;
+}

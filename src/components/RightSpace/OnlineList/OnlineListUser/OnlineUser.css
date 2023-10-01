@@ -1,0 +1,31 @@
+.OnlineUserMain{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 7px;
+    margin-bottom: 8px;
+}
+.OnlineUserListIcon{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: 14px;
+}
+.OnlineListUserName{
+    color: white;
+    font-size: 125%;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+.OnlineListUserWarpp{
+    margin-top: 4px;
+    margin-left: 3px;
+}
+.OnlineListUserState{
+    margin-top: 0;
+    margin-left: 10px;
+    transform: rotate(0.05deg);
+    font-size: 93%;
+    color: rgba(255, 255, 255, 0.665);
+}

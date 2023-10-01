@@ -1,0 +1,48 @@
+.UserInfoMain{
+    /* position:absolute; */
+    height: 60px;
+    width: 100%;
+    min-width: 240px;
+    display: flex;
+    border-top: solid 1px #3d3f4d;
+    background-color: #303443;
+    justify-content: space-between;
+
+}
+.UserInfoMainIcon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-top: 8px;
+    margin-left: 20px;
+}
+.UserInfoText{
+    font-size: 130%;
+    color: white;
+    margin-top: 9px;
+    margin-left: 10px;
+}
+.OnlineState{
+    display: flex;
+    margin-left: 4px;
+}
+.OnlineIcon{
+    display: flex;
+    width: 11px;
+    height: 11px;
+    background-color: #edff49;
+    margin-top:5px;
+    margin-left: 3px;
+    border-radius: 50px;
+}
+.OnlineText{
+    font-size: 90%;
+    color: white;
+    margin-top: 0px;
+    margin-left: 6px;
+}
+.LeftBarMoreIcon{
+    color: white;
+    margin-top: 17px;
+    margin-right: 12px;
+}

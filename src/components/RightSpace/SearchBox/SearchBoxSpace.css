@@ -1,0 +1,20 @@
+.SearchBoxMain{
+    width: 92%;
+    height: 55px;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 50px;
+    background-color: #353845;
+    display: flex;
+}
+.searchBoxIcon{
+    color: #edff498a;
+    margin-top: 14px;
+    margin-left: 13px;
+}
+.searchBoxText{
+    font-size: 120%;
+    margin-top: 12px;
+    margin-left: 10px;
+    color: #edff4987;
+}
