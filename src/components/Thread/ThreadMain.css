@@ -93,3 +93,16 @@
     color: white;
     margin-left: 5px;
 }
+.ThreadMainPerson{
+    display: flex;
+}
+.ThreadMainPersonIcon{
+    color: white;
+    margin-top: 13px;
+    margin-left: 10px;
+}
+.ThreadMainPersonText{
+    color: white;
+    margin-top: 14px;
+    margin-left: 1px;
+}
