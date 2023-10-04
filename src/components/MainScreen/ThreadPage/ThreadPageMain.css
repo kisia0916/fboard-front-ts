@@ -116,8 +116,7 @@
     width: 5px;
     height: 0;
 }
-.ThreadPageMessSpace::-webkit-scrollbar-track {
-}
+
 .ThreadPageMessSpace::-webkit-scrollbar-thumb {
     background-color: #353845;
 
