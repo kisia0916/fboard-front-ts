@@ -1,0 +1,20 @@
+.ThreadTopTagMain{
+    height: 25px;
+    margin-top: 12px;
+    background-color: #353845;
+    display: flex;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+.ThreadTopTagIcon{
+    color: #edff49;
+    margin-top: 2.5px;
+    margin-left: 6px;
+}
+.ThreadTopTagTitle{
+    color: white;
+    font-size: 85%;
+    margin-top: 2px;
+    margin-right: 9px ;
+    margin-left: 3px;
+}

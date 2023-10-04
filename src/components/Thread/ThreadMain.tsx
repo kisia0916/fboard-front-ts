@@ -23,7 +23,8 @@ function ThreadMain(props:{topFlg?:boolean}) {
         </div>
         <div className='ThreadMainRightBottom'>
           <img src='/photos/zbnU2dcD_400x400.jpg'  alt='logo' className='ThreadCreateUserIcon'/>
-          <span className='ThreadCreateUserName'>fumi - 2023/10/2</span>
+          <span className='ThreadCreateUserName'>fumi</span>
+          <span className='ThreadCreateDataText'> - 2023/10/2</span>
           <div className='ThreadMainLike'>
               <FavoriteIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
               <span className='ThreadMainLikeNum'>12</span>

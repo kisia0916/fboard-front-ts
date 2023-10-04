@@ -9,7 +9,7 @@ function HomeScreen() {
     <div className='MainScreen'>
       <div className='MainScreenTop'>
         <div className='MainScreenTopTexts'>
-          <HomeIcon style={{fontSize:"208%"}} className='MainScreenIcon'/>
+          {/* <HomeIcon style={{fontSize:"208%"}} className='MainScreenIcon'/> */}
           <span className='MainScreenTitle'>Home</span>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import "./OnlineUser.css"
 function OnLineUser(props:{userName:string}) {
+
   return (
     <div className='OnlineUserMain'>
         <img src="/photos/zbnU2dcD_400x400.jpg" className='OnlineUserListIcon' alt=''/>

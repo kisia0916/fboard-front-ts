@@ -1,0 +1,31 @@
+.ThreadUserPostMain{
+    width: 100%;
+    height: 73px;
+    display: flex;
+}
+.ThreadUserPostUserIcon{
+    width: 43px;
+    height: 43px;
+    margin-top: 19px;
+    margin-left: 4.01%;
+    border-radius: 50px;
+}
+.ThreadUserPostUserName{
+    color: white;
+    font-size: 130%;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+.ThreadUserPostUserRight{
+}
+.ThreadUserPostText{
+    color: white;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+.ThreadUserPostDate{
+    font-size: 90%;
+    color: white;
+    margin-top: 15px;
+}

@@ -1,0 +1,38 @@
+.ThreadOnlineSpace{
+    width: 92%;
+    /* height: 290px; */
+    margin: auto;
+    margin-top:20px;
+    border-radius: 10px;
+    background-color: #353845;
+}
+.ThreadOnlineTitle{
+    width: 100%;
+    height: 37px;
+    border-radius: 10px 10px 0 0;
+    background-color: #edff49;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.ThreadOnlineText{
+    font-size: 120%;
+    margin-top: 3px;
+    margin-left: 5px;
+    color: #3c4145;
+}
+.TagRankIcon{
+    margin-top: 7px;
+    color: #31353e;
+    font-size: 80%;
+    margin-left: 12px;
+}
+.ThreadOnlineMainSpace{
+    width: 100%;
+    height: calc(100% - 37px);
+}
+.ThreadOnlineIcon{
+    margin-top: 6px;
+    color: #3b3f49;
+    margin-left: 12px;
+}

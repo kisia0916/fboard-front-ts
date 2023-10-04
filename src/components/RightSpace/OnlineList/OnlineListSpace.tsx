@@ -14,7 +14,6 @@ function OnlineListSpace() {
             <OnLineUser userName='kisia0916'/>
             <OnLineUser userName='c++絶殺'/>
             <OnLineUser userName='いけんと'/>
-
         </div>
     </div>
   )

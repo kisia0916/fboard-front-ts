@@ -1,0 +1,125 @@
+.MainScreen{
+    width: calc(100% - 290px - 360px);
+    /* min-width: 600px; */
+    height: 100vh;
+    /* background-color: red; */
+    /* border-left: solid #373946 1px;
+    border-right: solid #373946 1px; */
+    border-left: solid #3d3f4d 1px;
+    border-right: solid #3d3f4d 1px;
+
+}
+.MainScreenTop{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    /* background-color: #2a2c3aac */
+    border-bottom: solid #3d3f4d 1px;
+    border-bottom: solid 1px #4e5363;
+    justify-content: space-between;
+    /* margin-bottom:20px; */
+}
+.MainScreenTopTexts{
+    display: flex;
+}
+.ThreadPageMainTitle{
+    color: white;
+    margin: auto;
+    margin-top: 6px;
+    font-size: 145%;
+    margin-left: 10px;
+}
+.ThreadPageMainBack{
+    color: white;
+    margin-top: 12px;
+}
+.MainScreenTopWarpp{
+    display: flex;
+    margin-left: 2.5%;
+}
+.MainScreenTopLeft{
+    display: flex;
+}
+.ThreadPageTopRightMessIcon{
+    color: white;
+    margin-top: 13px;
+}
+.ThreadPageTopRightMessText{
+    color: white;
+    margin-top: 10px;
+    margin-right: 29px;
+    margin-left: 5px;
+    font-size: 110%;
+}
+.ThreadPageTopRightCallIcon{
+    color: white;
+    margin-top: 13px;
+    margin-right: 22px;
+}
+.ThreadPageMessSpace{
+    width: 100%;
+    overflow: scroll;
+    height: calc(100% - 48px - 80px);
+}
+.ThreadPageSendSpace{
+    z-index: 1;
+
+    width: 100%;
+    height: 80px;
+    display: flex;
+    background-color:#282a36;
+}
+.ThreadPageSendBox{
+    width: 93%;
+    height: 52px;
+    margin-left: 20px;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 12px;
+    background-color: #353845;
+    display: flex;
+}
+.ThreadPageSendBoxImgIcon{
+    color: #effe61;
+
+    margin-top: 13px;
+    margin-left: 22px;
+}
+.ThreadPageSendTextBox{
+    width: calc(100% - 80px - 43px - 4px);
+    display: flex;
+}
+.ThreadPageSendButton{
+    width: 39px;
+    height: 39px;
+    margin-top: 6px;
+    
+    border-radius: 50px;
+    background-color: #effe61;
+    display: flex;
+}
+.ThreadPageSendButtonIcon{
+    color:#3c414d;
+
+    /* color: #effe61; */
+
+    margin-left: 10px;
+    margin-top: 8px;
+}
+.ThreadPageSendTextBoxHintText{
+    font-size: 130%;
+    margin-top: 11px;
+    margin-left: 3px;
+    color: #edff4987;;
+}
+.ThreadPageMessSpace::-webkit-scrollbar{
+    width: 5px;
+    height: 0;
+}
+.ThreadPageMessSpace::-webkit-scrollbar-track {
+}
+.ThreadPageMessSpace::-webkit-scrollbar-thumb {
+    background-color: #353845;
+
+    border-radius: 10px;
+  }
