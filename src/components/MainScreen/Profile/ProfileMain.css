@@ -1,0 +1,211 @@
+.MainScreen{
+    width: calc(100% - 290px - 360px);
+    /* min-width: 600px; */
+    height: 100vh;
+    /* background-color: red; */
+    /* border-left: solid #373946 1px;
+    border-right: solid #373946 1px; */
+    border-left: solid #3d3f4d 1px;
+    border-right: solid #3d3f4d 1px;
+
+}
+.MainScreenTop{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    /* background-color: #2a2c3aac */
+    border-bottom: solid #3d3f4d 1px;
+    border-bottom: solid 1px #4e5363;
+    justify-content: space-between;
+    /* margin-bottom:20px; */
+}
+.MainScreenTopTexts{
+    display: flex;
+}
+.ProfilePageMainBack{
+    color: white;
+    margin-top: 12px;
+}
+.MainScreenTopWarpp{
+    display: flex;
+    margin-left: 2.5%;
+}
+.ProfilePageMainTitle{
+    color: white;
+    margin: auto;
+    margin-top: 6px;
+    font-size: 145%;
+    margin-left: 10px;
+}
+
+.profileTopUserState{
+    display: flex;
+    margin-top: 0.3px;
+}
+.profileTopUserStateIcon{
+    width: 12px;
+    height: 12px;
+    background-color: #edff49;
+    border-radius: 50px;
+    margin-top: 18px;
+    margin-left: 10px;
+}
+.profileTopUserStateText{
+    color: white;
+    margin-top: 13px;
+    margin-left: 5px;
+}
+.ProfileMainConTents{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.ProfilePageLeft{
+    width: 34%;
+    height: 100%;
+    border-right: solid 1px #3d3f4d;
+}
+.ProfilePageRight{
+    width: 66%;
+    height: 100%;
+}
+
+.ProfilePageRightTop{
+    height: 50px;
+    width: 100%;
+    border-bottom: solid 1px #4e5363;
+}
+.ProfilePageRightTabs{
+    width: 100%;
+    display:flex;
+    justify-content: space-around;
+}
+.ProfileRightTabWarpp{
+    height: 100%;
+}
+.ProfileRightTabText{
+    color: white;
+    font-size: 130%;
+    display: flex;
+    margin-top: 8px;
+}
+.ProfileRightBottomLine{
+    width: 100%;
+    height: 5px;
+    margin-left: 3px;
+    margin-top: 5px;
+    border-radius: 50px;
+    background-color: #edff49;
+}
+.ProfilePageLeftTop{
+    width: 100%;
+    height: 199px;
+    position: relative;
+}
+.ProfilePageLeftHeaderImg{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-bottom: solid 1px #3d3f4d;;
+}
+.ProfilePageIconMain{
+    position: relative;
+    width: 100%;
+    height: 199px;
+    display: flex;
+}
+.ProfilePageLeftIconImg{
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    margin: auto;
+}
+.ProfilePageIconWarpp{
+    width: 123px;
+    height: 123px;
+    border-radius: 50%;
+    display: flex;
+    margin: auto;
+    margin-top: 113px;
+    background-color: #282a36;
+}
+.ProfileLeftUserNameWarpp{
+    width: 100%;
+    display: flex;
+    /* border-bottom: solid 1px #3d3f4d;; */
+    background-color: #35384500;
+}
+.ProfileLeftUserName{
+    margin: auto;
+    margin-top: 43px;
+    margin-bottom: 9px;
+    color: white;
+    font-size: 160%;
+}
+.ProfilePageLeftProfileMess{
+    /* margin-top: 94px; */
+    width: 100%;
+    border-top: solid 1px #3d3f4d;;
+
+    border-bottom: solid 1px #3d3f4d;;
+    display: flex;
+}
+.ProfilePageLeftProfileMessWarpp{
+    width: 82%;
+    margin: auto;
+    
+    /* display: flex; */
+}
+.ProfilePageLeftProfileMessText{
+    white-space: pre-line;
+    margin: 0;
+    color: white;
+    margin: auto;
+    font-size: 110%;
+    margin-top: 12px;
+    margin-bottom: 18px;
+    margin-left: 3px;
+}
+.ProfilePageLeftProfileMessWarppTitle{
+    color: #edff49;
+    margin: auto;
+    margin-left: 0;
+    font-size: 110%;
+    display: flex;
+    margin-top: 5px;
+    margin-left: 3px;
+}
+.ProfilePageLeftProfileMessWarppTitleWarpp{
+    display: flex;
+}
+.ProfilePageLeftProfileMessEditIcon{
+    color: #edff49;
+    margin-top: 10px;
+}
+.ProfilePageLeftAddFriendButtonWarpp{
+    display: flex;
+}
+.ProfilePageLeftAddFriendButton{
+    width: 83%;
+    height: 42px;
+    background-color: #edff49;
+    margin: auto;
+    border-radius: 50px;
+    margin-top: 94px;
+    margin-bottom: 17px;
+    display: flex
+}
+.ProfilePageLeftAddFriendButtonIcon{
+    color: #3c414d;
+}
+.ProfilePageLeftAddFriendButtonText{
+    color: #3c414d;
+    font-size: 120%;
+    margin-top: 0px;
+    margin-left: 3px;
+}
+.ProfileRightMainSpace{
+    width: 100%;
+    height: 100%;
+}

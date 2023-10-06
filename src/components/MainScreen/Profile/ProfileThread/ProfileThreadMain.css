@@ -1,0 +1,121 @@
+.ProfileThreadMain{
+    width: 100%;
+    height: 115px;
+    display: flex;
+    border-bottom: solid 1px #4e5363;
+
+}
+.ProfileThreadLeft{
+    display: flex;
+}
+.ProfileThreadIcon{
+    width: 80px;
+    height: 80.5px;
+    margin: auto;
+    margin-left: 35px;
+    border-radius: 10px;
+}
+
+.ProfileThreadBottom{
+    display: flex;
+}
+.ProfileThreadTitleText{
+    display: flex;
+    color: white;
+    font-size:155%;
+    margin-top:15.3px;
+    margin-left: 18px;
+}
+.ProfileThreadCreateIcon{
+    width: 28px;
+    height: 28px;
+    margin-top: 13px;
+    margin-left: 18px;
+    border-radius: 50px;
+}
+.ProfileThreadBottom{
+    display: flex;
+}
+.ProfileThreadCreateName{
+    color:rgba(255, 255, 255, 0.786);
+    font-size: 130%;
+    margin-top: 11px;
+    margin-left: 8px;
+}
+.ProfileThreadCreateDate{
+    color: white;
+    font-size: 100%;
+    margin-top: 16px;
+    margin-left: 3px;
+}
+.ProfileThreadLikeButton{
+    height: 28px;
+    border-radius: 5px;
+    margin-top: 14px;
+    margin-left: 12px;
+    background-color: #494e62;
+
+    display: flex;
+}
+.ProfileThreadButtonIcon{
+    margin-top: 3px;
+    margin-left: 10px;
+    color: #edff49;
+}
+.ProfileThreadButtonText{
+    color: white;
+    margin-left: 3px;
+    margin-top: 1px;
+    margin-right: 15px;
+}
+.ProfileThreadMessNum{
+    display: flex;
+}
+.ProfileThreadMessNumIcon{
+    color: white;
+    margin-top: 16px;
+    margin-left: 12px;
+}
+.ProfileThreadMessNumText{
+    color: white;
+    margin-top: 16px;
+    margin-left: 4px;
+}
+.ProfileThreadPerson{
+    display: flex;
+}
+.ProfileThreadPersonIcon{
+    color: white;
+    margin-top: 13px;
+    margin-left: 8px;
+}
+.ProfileThreadRight{
+    width: calc(100% - 116px);
+    
+}
+.ProfileThreadLeftTop{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.ProfileThreadTag{
+    height: 23px;
+    margin-top: 22px;
+    margin-right: 18px;
+    border-radius: 50px;
+    background-color: #353845;
+    display: flex;
+}
+.ProfileThreadTagIcon{
+    color: #edff49;
+
+    margin-top: 2px;
+    margin-left: 4px;
+}
+.ProfileThreadTagText{
+    color: white;
+    font-size:85%;
+    margin-top: 1px;
+    margin-right: 10px;
+    margin-left: 2px;
+}

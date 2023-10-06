@@ -82,8 +82,8 @@
 .ThreadPageSendBoxImgIcon{
     color: #effe61;
 
-    margin-top: 13px;
-    margin-left: 22px;
+    margin-top: 12px;
+    margin-left: 17px;
 }
 .ThreadPageSendTextBox{
     width: calc(100% - 80px - 43px - 4px);
@@ -109,7 +109,7 @@
 .ThreadPageSendTextBoxHintText{
     font-size: 130%;
     margin-top: 11px;
-    margin-left: 3px;
+    margin-left: 0px;
     color: #edff4987;;
 }
 .ThreadPageMessSpace::-webkit-scrollbar{

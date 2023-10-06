@@ -4,14 +4,16 @@ import "./App.css"
 import LeftBar from './components/LeftSpace/LeftBar';
 import RightBar from './components/RightSpace/RightBar';
 import ThreadPage from './pages/ThreadPage';
+import ProfileMain from './components/MainScreen/Profile/ProfileMain';
 function App() {
   return (
     <div className="App">
       <div className='AppWarpp'>
           {/* レフトバー */}
           <LeftBar/>
-          {/* <Home/> */}
-          <ThreadPage/>
+          <Home/>
+          {/* <ProfileMain/> */}
+          {/* <ThreadPage/> */}
           <RightBar/>
           {/* ライトバー */}
       </div>
