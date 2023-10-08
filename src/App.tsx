@@ -5,6 +5,8 @@ import LeftBar from './components/LeftSpace/LeftBar';
 import RightBar from './components/RightSpace/RightBar';
 import ThreadPage from './pages/ThreadPage';
 import ProfileMain from './components/MainScreen/Profile/ProfileMain';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
 function App() {
   return (
     <div className="App">
@@ -12,10 +14,11 @@ function App() {
           {/* レフトバー */}
           <LeftBar/>
           <Home/>
-          {/* <ProfileMain/> */}
+          {/* <Profile/> */}
           {/* <ThreadPage/> */}
           <RightBar/>
           {/* ライトバー */}
+          {/* <Login/> */}
       </div>
     </div>
   );

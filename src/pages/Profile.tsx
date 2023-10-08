@@ -1,8 +1,11 @@
 import React from 'react'
+import ProfileMain from '../components/MainScreen/Profile/ProfileMain'
 
 function Profile() {
   return (
-    <div>Profile</div>
+    <div style={{width:"100%",height:"100%"}}>
+      <ProfileMain/>
+    </div>
   )
 }
 
