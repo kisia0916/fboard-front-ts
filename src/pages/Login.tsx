@@ -1,10 +1,10 @@
 import React from 'react'
 import LoginPageMain from '../components/Login/LoginPageMain'
 
-function Login() {
+function Login(props:{setLoginState:any}) {
   return (
     <>
-      <LoginPageMain/>
+      <LoginPageMain setLoginState={props.setLoginState}/>
     </>
   )
 }

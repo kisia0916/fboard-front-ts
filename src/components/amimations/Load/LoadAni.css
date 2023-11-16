@@ -1,0 +1,19 @@
+.LoadAniMain{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: solid 5px #353845;
+    border-top: 4px solid #edff49;; 
+    animation:load 0.8s linear infinite;
+    margin: auto;
+    margin-top: 30px;
+}
+@keyframes load{
+    0%{
+        transform: rotate(0deg);
+      }
+    
+      100%{
+        transform: rotate(360deg);
+      }
+}

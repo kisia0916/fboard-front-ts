@@ -18,6 +18,10 @@
     /* font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c'; */
 
 }
+.ThreadMain:hover{
+    background-color: #383a47db;;
+
+}
 
 .ThreadMainRight{
     width: calc(100% - 95px);
@@ -37,6 +41,7 @@
     margin-top: 19px;
     border-radius: 10px;
 }
+
 .ThreadMainTitleText{
     display: flex;
     color: white;

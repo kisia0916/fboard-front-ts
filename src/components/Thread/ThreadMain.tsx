@@ -4,14 +4,14 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThreadTagMain from './ThreadTag/ThreadTagMain';
 import PersonIcon from '@mui/icons-material/Person';
-function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean}) {
+function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadTitle:string,likeNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string}) {
   let radStyle:string = ""
   let leftSpace:string = ""
   let fontSize:string = ""
   let fontTop:string = ""
 
   if(props.topFlg){
-    radStyle = "10px 10px 0 0"
+    // radStyle = "10px 10px 0 0"
   }
   if(props.profileFlg){
     leftSpace = "36px"
@@ -25,22 +25,22 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean}) {
       </div>
       <div className='ThreadMainRight'>
         <div className='ThreadRightTop'>
-          <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>fboardスレッドUIテスト</span>
+          <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>{props.threadTitle}</span>
           <div className='ThreadMainTagList'>
             <ThreadTagMain/>
           </div>
         </div>
         <div className='ThreadMainRightBottom'>
           <img src='/photos/zbnU2dcD_400x400.jpg'  alt='logo' className='ThreadCreateUserIcon'/>
-          <span className='ThreadCreateUserName'>fumi</span>
+          <span className='ThreadCreateUserName'>{props.createUserName}</span>
           <span className='ThreadCreateDataText'> - 2023/10/2</span>
           <div className='ThreadMainLike'>
               <FavoriteIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
-              <span className='ThreadMainLikeNum'>12</span>
+              <span className='ThreadMainLikeNum'>{props.likeNum}</span>
           </div>
           <div className='ThreadMainMess'>
               <ChatBubbleIcon className='ThreadMainMessIcon' style={{fontSize:"140%"}}/>
-              <span className='ThreadMainMessNum'>31</span>
+              <span className='ThreadMainMessNum'>{props.postNum}</span>
               
           </div>
           <div className='ThreadMainPerson'>

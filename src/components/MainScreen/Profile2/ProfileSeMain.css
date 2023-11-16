@@ -1,0 +1,184 @@
+.ProfileSeMain{
+    width: calc(100% - 290px - 360px);
+    height: 100vh;
+    /* background-color: red; */
+    border-left: solid #3d3f4d 1px;
+    border-right: solid #3d3f4d 1px;
+}
+.ProfileSeTopBar{
+    width: 100%;
+    height: 48px;
+    border-bottom: solid #3d3f4d 1px;
+    display: flex;
+    justify-content: space-between;
+}
+.ProfileSeTopHeaderImg{
+    width: calc(100% - 290px - 361px);
+    object-fit: cover;
+    height: 270px;
+    position: absolute;
+    border-bottom: solid #3d3f4d 1px;
+}
+.ProfileSeTopBarLeft{
+    display: flex;
+}
+.ProfileSeTopBarUserName{
+    color: white;
+    font-size: 150%;
+    margin-top: 5px;
+    margin-left:20px;
+}
+.ProfileUserState{
+    height: 25px;
+    margin-top: 12px;
+    margin-left: 10px;
+    border-radius: 40px;
+    display: flex;
+    /* background-color:#414453;; */
+}
+.ProfileUserStateIcon{
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    margin-top:6px;
+    margin-left: 4px;
+    background-color: #edff49;;
+}
+.ProfileUserStateText{
+    margin-top: 0px;
+    margin-left: 6px;
+    color: white;
+}
+.ProfileSeBackIcon{
+    color: white;
+    margin-top: 12px;
+    margin-left: 21px;
+}
+.ProfileSeTopBarRight{
+    display: flex;
+}
+.ProfileUserNumIcon{
+    color: white;
+    margin-top: 11px;
+}
+.ProfileUserNumText{
+    color: white;
+    margin-top: 9px;
+    font-size: 110%;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.ProfileSeTopSpace{
+
+}
+.ProfileSeTopIconImg{
+    position: absolute;
+}
+.ProfileSeTopIconImg{
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    margin-left: 55px;
+    margin-top: 165px;
+}
+.ProfileSeTopIconWarpp{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    background-color:#282a36;;
+    border-radius: 50%;
+    margin-left: 50px;
+    margin-top: 160px;
+}
+.ProfileSeTopUserName{
+    color: white;
+    font-size: 255%;
+    margin-left: 225px;
+    margin-top: 14px;
+}
+.ProfileSeTopUserText{
+    width: calc(100vw - 290px - 361px);
+    height: 100px;
+    position: absolute;
+    margin-top: 180px;
+    display: flex;
+}
+.ProfileSeTopUserFollowButton{
+    width: 120px;
+    height: 37px;
+    border-radius: 50px;
+    margin-top: 30px;
+    margin-left: 13px;
+    background-color: #edff49;;
+    display: flex;
+}
+.ProfileSeTopUserFollowButtonText{
+    margin: auto;
+    font-size: 120%;
+    color: #3c414d;
+}
+.ProfileSeMainSpace{
+    width: 100%;
+    margin-top: 270px;
+    height: calc(100vh - 319px);
+}
+
+.ProfileSeMainProfileSpace{
+    width: 100%;
+    min-height: 76px;
+    border-bottom: solid #3d3f4d 1px;
+    display: flex;
+}
+.ProfileSeMainProfileSpace{
+    
+}
+.ProfileSeMainProfileSpaceText{
+    color: white;
+    font-size: 145%;
+    margin-top: 20px;
+
+}
+.ProfileSeMainProfileSpaceWarpp{
+    margin-left: 229px;
+    display: flex;
+    width: calc(100% - 229px - 80px);
+}
+.ProfileSeMainProfileSpaceSendMessIcon{
+    color: white;
+    margin-top: 5px;
+    margin-left: 6px;
+}
+.ProfileSeMainProfileSpaceSendMessIconWarpp{
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    display: flex;
+    background-color:#3d3f4d;
+    margin-top: 18px;
+}
+.ProfileSeMainSelectContentBar{
+    width: 100%;
+    height: 50px;
+    border-bottom: solid #3d3f4d 1px;
+    display: flex;
+    justify-content: space-around;
+}
+.ProfileSeMainSelectContentBarTitle{
+    color: white;
+    font-size: 130%;
+    display: flex;
+    padding-top: 6px;
+}
+.ProfileSeMainSelectContentBarWarpp{
+    height: 100%;
+}
+.ProfileSeMainSelectContentBarSelected{
+    width: 106%;
+    height: 6px;
+    border-radius: 50px;
+    margin-top: 5px;
+    background-color:#edff49;
+}
+.ProfileSeMainCons{
+    width: 100%;
+}

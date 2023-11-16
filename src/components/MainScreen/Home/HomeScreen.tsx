@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./HomeScreen.css"
 import HomeIcon from '@mui/icons-material/Home';
 import ThreadMain from '../../Thread/ThreadMain';
 import HomeScreenCreateMain from './HomeScreenCreate/HomeScreenCreateMain';
+import GetThreadData from './loadFun/GetThreadData';
+import LoadAni from '../../amimations/Load/LoadAni';
 
 function HomeScreen() {
+  const [threadPage,setThreadPage] = useState<number>(0)
+  const [loadThreadDone,setThreadDone] = useState<boolean>(false)
   return (
     <div className='MainScreen'>
       <div className='MainScreenTop'>
@@ -16,22 +20,10 @@ function HomeScreen() {
       <div className='MainScreenMainWarpp'>
         <HomeScreenCreateMain/>
         <div className='MainScreenMainSpace'>
-            <ThreadMain topFlg={true}/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-            <ThreadMain/>
-
-
+          {/*こに新しく追加され他スレっ度を入れる*/}
+          {loadThreadDone?<></>:<LoadAni/>}
+          <GetThreadData pageNum={threadPage} loadDone={setThreadDone}/>
+          {/*こに新しく読み込まれてスレッドを入れる*/}
         </div>
       </div>
     </div>

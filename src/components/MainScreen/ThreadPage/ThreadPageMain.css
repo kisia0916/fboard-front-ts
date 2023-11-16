@@ -25,13 +25,13 @@
 .ThreadPageMainTitle{
     color: white;
     margin: auto;
-    margin-top: 6px;
+    margin-top: 0px;
     font-size: 145%;
     margin-left: 10px;
 }
 .ThreadPageMainBack{
     color: white;
-    margin-top: 12px;
+    margin-top: 6px;
 }
 .MainScreenTopWarpp{
     display: flex;
@@ -70,7 +70,7 @@
     background-color:#282a36;
 }
 .ThreadPageSendBox{
-    width: 93%;
+    width: 95%;
     height: 52px;
     margin-left: 20px;
     border-radius: 50px;
@@ -111,6 +111,9 @@
     margin-top: 11px;
     margin-left: 0px;
     color: #edff4987;;
+}
+.ThreadPageMessSpace{
+    background-color: rgba(44, 46, 58, 0.424)
 }
 .ThreadPageMessSpace::-webkit-scrollbar{
     width: 5px;

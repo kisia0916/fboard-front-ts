@@ -1,20 +1,49 @@
 .ThreadUserPostMain{
     width: 100%;
-    height: 73px;
+    height: 63px;
     display: flex;
+    margin-top: 7px;
+}
+.ThreadUserPostMain:hover{
+    background-color: #383a47db;;
+}
+.ThreadUserPostMain:hover .ThreadUserPostProButton{
+    display: block;
+    width: 30px;
+    height: 20px;
+    background-color:#2e3038db;;
+    margin-right: 12px;
+    margin-top: 8px;
+    border-radius: 4px;
+    display: flex;
+    
+    border: solid 1px #303035db;;
+}
+.ThreadUserPostMain:hover .ThreadUserPostProIcon{
+    margin: auto;
+    margin-top: 0;
+    color: #edff49;
 }
 .ThreadUserPostUserIcon{
-    width: 43px;
-    height: 43px;
-    margin-top: 19px;
+    width: 44px;
+    height: 44px;
+    margin-top: 9px;
     margin-left: 4.01%;
+    margin-left: 3%;
+
     border-radius: 50px;
+}
+.ThreadUserPostProButton{
+    display: none;
+}
+.ThreadUserPostUserRight{
+    width: calc(100% - 3.68% - 44px);
 }
 .ThreadUserPostUserName{
     color: white;
-    font-size: 130%;
+    font-size: 120%;
     margin-left: 15px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-right: 5px;
 }
 
@@ -26,5 +55,11 @@
 .ThreadUserPostDate{
     font-size: 90%;
     color: white;
-    margin-top: 15px;
+    margin-top: 8px;
+}
+.ThreadUserPostNames{
+    display: flex;
+}
+.ThreadUserPostRightTop{
+    justify-content: space-between;
 }
