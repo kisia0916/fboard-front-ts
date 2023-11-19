@@ -12,8 +12,8 @@ import CheckCookieLogin from './logics/CheckCookieLogin';
 import ProfileSeMain from './components/MainScreen/Profile2/ProfileSeMain';
 
 function App() {
-  const [loginState,setLoginState] = useState<boolean>(true)//ここ本当はfalse
-  const [loadState,setLoadState] = useState<boolean>(true)//ここ本当はfalse
+  const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
+  const [loadState,setLoadState] = useState<boolean>(false)//ここ本当はfalse
   return (
     <div className="App">
       <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
@@ -26,7 +26,7 @@ function App() {
                 <Route path='/' element={loginState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>}/>
                 <Route path='/login' element={<Login setLoginState={setLoginState}/>} />
                 <Route path='/home' element={loginState?<Home/>:<Navigate replace to="/login"/>}/>
-                <Route path='/thread' element={<ThreadPage/>}/>
+                <Route path='/thread/:id' element={<ThreadPage/>}/>
                 <Route path='/profile' element={<ProfileSeMain/>}/>
               </Routes>
               {loginState?<RightBar/>:<></>}

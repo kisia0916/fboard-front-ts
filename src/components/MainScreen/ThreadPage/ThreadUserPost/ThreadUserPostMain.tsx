@@ -1,15 +1,16 @@
 import React from 'react'
 import ReplyIcon from '@mui/icons-material/Reply';
 import "./ThreadUserPostMain.css"
-function ThreadUserPostMain() {
+import ParseDate from '../../../../logics/ParseDate';
+function ThreadUserPostMain(props:{userName:String,date:String,title:String,icon:string}) {
   return (
     <div className='ThreadUserPostMain'>
         <img src="/photos/zbnU2dcD_400x400.jpg" className='ThreadUserPostUserIcon' alt=''/>
         <div className='ThreadUserPostUserRight'>
             <div className='ThreadUserPostRightTop' style={{display:"flex"}}>
                 <div className="ThreadUserPostNames">
-                  <span className='ThreadUserPostUserName'>fumi</span>
-                  <span className='ThreadUserPostDate'> - 2023/10/3</span>
+                  <span className='ThreadUserPostUserName'>{props.userName}</span>
+                  <span className='ThreadUserPostDate'> - {<ParseDate data={props.date}></ParseDate>}</span>
                 </div>
                 <div className='ThreadUserPostPropaty'>
                   <span className='ThreadUserPostProButton'>
@@ -17,7 +18,7 @@ function ThreadUserPostMain() {
                   </span>
                 </div>
             </div>
-            <span className='ThreadUserPostText'>まず、学校内での問題はエナドリに起因するものだから、明</span>
+            <span className='ThreadUserPostText'>{props.title}</span>
         </div>
 
     </div>

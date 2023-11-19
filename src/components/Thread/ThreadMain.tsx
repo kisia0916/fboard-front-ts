@@ -4,7 +4,9 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThreadTagMain from './ThreadTag/ThreadTagMain';
 import PersonIcon from '@mui/icons-material/Person';
-function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadTitle:string,likeNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string}) {
+import { Link } from 'react-router-dom';
+import ParseDate from '../../logics/ParseDate';
+function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,threadTitle:string,likeNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string}) {
   let radStyle:string = ""
   let leftSpace:string = ""
   let fontSize:string = ""
@@ -19,6 +21,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadTitle:strin
     fontTop = "17px"
   }
   return (
+    <Link to={`/thread/${props.threadId}`} style={{ textDecoration: "none" }}>
     <div className='ThreadMain' style={{borderRadius:radStyle}}>
       <div className='ThreadMainLeft' style={{marginLeft:leftSpace}}>
           <img src='/photos/unnamed.jpg'  alt='logo' className='ThreadTitleIcon'/>
@@ -33,7 +36,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadTitle:strin
         <div className='ThreadMainRightBottom'>
           <img src='/photos/zbnU2dcD_400x400.jpg'  alt='logo' className='ThreadCreateUserIcon'/>
           <span className='ThreadCreateUserName'>{props.createUserName}</span>
-          <span className='ThreadCreateDataText'> - 2023/10/2</span>
+          <span className='ThreadCreateDataText'> - {<ParseDate data={props.createdDate}></ParseDate>}</span>
           <div className='ThreadMainLike'>
               <FavoriteIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
               <span className='ThreadMainLikeNum'>{props.likeNum}</span>
@@ -50,6 +53,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadTitle:strin
         </div>
       </div>
     </div>
+    </Link>
   )
 }
 

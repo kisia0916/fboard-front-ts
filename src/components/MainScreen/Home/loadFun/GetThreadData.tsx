@@ -33,7 +33,7 @@ function GetThreadData(props:{pageNum:number,loadDone:any}) {
     <div>
       {
         threadList.map((i)=>{
-          return <ThreadMain threadTitle={i.title} likeNum={i.likeNum} userNum={30} postNum={i.messNum} createUserName={i.userName} createdDate='' tagList={[]} titleIcon='' userIcon=''/>
+          return <ThreadMain threadTitle={i.title} threadId={i.theradId} likeNum={i.likeNum} userNum={30} postNum={i.messNum} createUserName={i.userName} createdDate={i.createdAt} tagList={[]} titleIcon='' userIcon=''/>
         })
       }
     </div>

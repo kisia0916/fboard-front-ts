@@ -62,14 +62,17 @@ function ProfileSeMain() {
               </div>
           </div>
           <div className='ProfileSeMainCons'>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' likeNum={10} userNum={30} postNum={30} createUserName='fumi' createdDate='' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+
+
 
 
           </div>

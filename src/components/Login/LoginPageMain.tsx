@@ -7,7 +7,8 @@ import { Navigate } from 'react-router-dom'
 export interface responseType{
   messType:string,
   userName:string,
-  icon:string
+  icon:string,
+  userId:string,
 }
 function LoginPageMain(props:{setLoginState:any}) {
   const [responseData,setRespomseData] = useState<responseType|undefined>(undefined)
@@ -20,6 +21,7 @@ function LoginPageMain(props:{setLoginState:any}) {
       setCookie("name",responseData?.userName)
       setCookie("pass",passValue)
       setCookie("icon",responseData?.icon)
+      setCookie("userId",responseData?.userId)
       setIsLogin(true)
       props.setLoginState(true)
     }else{

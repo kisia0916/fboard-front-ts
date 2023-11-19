@@ -9,6 +9,7 @@ function CheckCookieLogin(props:{setStateFun:any,setLoadStateFun:any}) {
       const name:string = cookies.name
       const pass:string = cookies.pass
       const hashFlg:boolean = false
+      
       axios.post("http://localhost:5000/user/certification/login",{
         userName:name,
         pass:pass,
