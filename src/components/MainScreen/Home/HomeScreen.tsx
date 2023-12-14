@@ -5,6 +5,7 @@ import ThreadMain from '../../Thread/ThreadMain';
 import HomeScreenCreateMain from './HomeScreenCreate/HomeScreenCreateMain';
 import GetThreadData from './loadFun/GetThreadData';
 import LoadAni from '../../amimations/Load/LoadAni';
+import MkPostWindowMain from '../../MkPostWindow/MkPostWindowMain';
 
 function HomeScreen() {
   const [threadPage,setThreadPage] = useState<number>(0)

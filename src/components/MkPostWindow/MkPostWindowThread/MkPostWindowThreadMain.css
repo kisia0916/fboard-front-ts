@@ -1,0 +1,190 @@
+.MkPostWindowThreadMain{
+    width: 500px;
+    height: 700px;
+    margin: auto;
+    background-color:#282a36;;
+    border-radius: 20px;
+    /* display: flex; */
+}
+.MkPostWindowThreadTitle{
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+.MkPostWindowThreadTitleText{
+    margin: auto;
+    color: #edff49;
+    font-size: 190%;
+}
+.MkPostWindowThreadScreen{
+    width: 100%;
+    height: 400px;
+}
+.MkPostWindowThreadTitleInputWarpp{
+    display: flex;
+}
+.MkPostWindowThreadTitleInputWarppWarpp{
+    display: flex;
+    width: 80%;
+    height: 52px;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: #353845;
+}
+.MkPostWindowThreadTitleInput{
+    width: 88%;
+    height: 45px;
+    display: flex;
+    margin: auto;
+    margin-top: 4px;
+    border: none;
+    outline: none;
+    background-color: rgb(0, 0, 0,0);
+    color: white;
+    font-weight: bolder;
+    font-size: 140%;
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+}
+.MkPostWindowThreadTitleInput::placeholder{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+    color: #edff4987;
+}
+.MkPostWindowThradFirstPostInputWarppWarpp{
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+.MkPostWindowThradFirstPostInputWarpp{    
+    margin: auto;
+    width: 80%;
+    border-radius: 15px;
+    height: 200px;
+    display: flex;
+    background-color: #353845;
+
+}
+.MkPostWindowThradFirstPostInput{
+    margin: auto;
+    width: 88%;
+    height: 90%;
+    border: none;
+    outline: none;
+    background-color: #282a3600;
+    color: white;
+    font-weight: bolder;
+    font-size: 125%;
+    resize: none;
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+}
+.MkPostWindowThradFirstPostInput::placeholder{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+    color: #edff4987;
+}
+.MkPostWindowThreadSelectImageWarpp{
+    margin: auto;
+    width: 80%;
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+}
+.MkPostWindowThreadSelectImagePreview{
+    width: 80px;
+    height: 80px;
+    border-radius:10px;
+    display: flex;
+}
+.MkPostWindowThreadEnterButton{
+    width: 80%;
+    height: 48px;
+    background-color: #edff49;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 50px;
+    display: flex;
+    border: none;
+    outline: none;
+}
+.MkPostWindowThreadEnterButtonText{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    color:#3c414d;
+    font-size: 170%;
+    font-weight: bold;
+    margin: auto;
+}
+.MkPostWindowThreadSelectImagePreviewImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-left: 5px;
+    border-radius: 12px;
+}
+.MkPostWindowThreadSelectImagePreviewRight{
+    width: calc(100% - 80px - 16px);
+    /* height: 100%; */
+}
+.MkPostWindowThreadSelectImagePreviewTitle{
+    color: white;
+    font-size: 130%;
+    margin: 0;
+    margin-top: 5px;
+    margin-left: 25px;
+    /* margin-left: 16px; */
+}
+.MkPostWindowThreadSelectImagePreviewAddButton{
+    height: 28px;
+    width: 40%;
+    background-color: #edff49;
+    border: none;
+    margin-left: 23px;
+    border-radius: 50px;
+    margin-top: 12px;
+}
+.MkPostWindowThreadSelectImagePreviewAddButtonText{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    color:#3c414d;
+    font-weight: bolder;
+}
+.MkPostWindowThreadTagWarpp{
+    width: 80%;
+    margin: auto;
+}
+.MkPostWindowThreadTagInputWarpp{
+    background-color: #353845;
+    width: 100%;
+    height: 52px;
+    border-radius: 50px;
+    margin-top: 20px;
+    display: flex;
+}
+.MkPostWindowThreadTagInput{
+    background-color: #353845;
+    border: none;
+    width: calc(100% - 60px);
+    height: 90%;
+    margin-left: 25px;
+    outline: none;
+    margin-top: 2px;
+    font-size: 140%;
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+    color: white;
+}
+.MkPostWindowThreadTagInput::placeholder{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+    color: #edff4987;
+}
+.MkPostWindowThreadTagAddButton{
+    width: 35px;
+    height: 35px;
+    margin-top: 8px;
+    margin-right: 10px;
+    border-radius: 50px;
+    background-color: #edff49;
+    border: none;
+    color: #3c414d;
+    display: flex;
+}

@@ -16,7 +16,19 @@ interface threadPostType{
   __v: Number
   _id: String;
 }
-
+interface newPostType{
+  createdAt: String;
+  mess:any;
+  userName:String;
+  postImg: String;
+  reply: String;
+  threadPostId: String;
+  updatedAt: String;
+  userIcon: String;
+  userId: String;
+  __v: Number
+  _id: String;
+}
 function LoadThreadPost(props:{loadDone:any}) {
   const thradId = useParams().id
   const [postList,setPostList] = useState<threadPostType[]>([])
@@ -26,7 +38,9 @@ function LoadThreadPost(props:{loadDone:any}) {
       threadId:thradId,
       threadPrivateToken:"0a5de211-065e-43d0-b1ea-10ec0f3f7f17"
     }).then((res)=>{
-      setPostList(res.data)
+      console.log(res.data)
+      setPostList(res.data.reverse())
+      // postList[index].mess = ""
       props.loadDone(true)
     })
   },[])

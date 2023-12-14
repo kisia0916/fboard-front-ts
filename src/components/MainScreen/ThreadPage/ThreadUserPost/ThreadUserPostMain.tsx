@@ -2,6 +2,7 @@ import React from 'react'
 import ReplyIcon from '@mui/icons-material/Reply';
 import "./ThreadUserPostMain.css"
 import ParseDate from '../../../../logics/ParseDate';
+import ChangeLineParse from '../../../../logics/ChangeLineParse';
 function ThreadUserPostMain(props:{userName:String,date:String,title:String,icon:string}) {
   return (
     <div className='ThreadUserPostMain'>
@@ -18,7 +19,9 @@ function ThreadUserPostMain(props:{userName:String,date:String,title:String,icon
                   </span>
                 </div>
             </div>
-            <span className='ThreadUserPostText'>{props.title}</span>
+            <div className='ThreadUserPostTextWarpp'>
+              <span className='ThreadUserPostText'><ChangeLineParse text={props.title as string}/></span>
+            </div>
         </div>
 
     </div>

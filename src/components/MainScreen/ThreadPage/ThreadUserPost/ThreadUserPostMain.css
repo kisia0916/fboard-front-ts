@@ -1,8 +1,8 @@
 .ThreadUserPostMain{
     width: 100%;
-    height: 63px;
+    /* height: 63px; */
     display: flex;
-    margin-top: 7px;
+    margin-top: 6px;
 }
 .ThreadUserPostMain:hover{
     background-color: #383a47db;;
@@ -28,7 +28,7 @@
     width: 44px;
     height: 44px;
     margin-top: 9px;
-    margin-left: 4.01%;
+    margin-left: 4.00%;
     margin-left: 2.9%;
 
     border-radius: 50px;
@@ -49,8 +49,8 @@
 
 .ThreadUserPostText{
     color: white;
-    margin-left: 15px;
-    margin-top: 3px;
+    font-size: 105%;
+
 }
 .ThreadUserPostDate{
     font-size: 90%;
@@ -63,6 +63,13 @@
 
 .ThreadUserPostRightTop{
     justify-content: space-between;
+}
+.ThreadUserPostTextWarpp{
+    display: flex;
+    margin-left: 15px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
 }
 .ThreadPageSendTextAria{
     width: 100%;

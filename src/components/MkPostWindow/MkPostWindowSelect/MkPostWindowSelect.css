@@ -1,0 +1,59 @@
+.MkPostWindowSelectMain{
+    width: 550px;
+    height: 650px;
+    margin: auto;
+    background-color:#282a36;;
+    border-radius: 20px;
+    display: flex;
+}
+.MkPostWindowSelectWarpp{
+    margin: auto;
+}
+.MkPostWindowSelectTopText{
+    color: #edff49;
+    font-size: 210%;
+}
+.MkPostWindowSelectBottom{
+    display: flex;
+}
+.MkPostWindowSelectSelect{
+    margin: auto;
+    margin-top: 40px;
+    border: none;
+    width: 270px;
+    height: 50px;
+    border-radius: 30px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    /* border: solid 1px #edff49; */
+    background-color: #353845;
+    color: white;
+    font-size: 120%;
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+
+}
+.MkPostWindowSelectEnterButton{
+    margin: auto;
+    width: 270px;
+    height: 50px;
+    background-color: #edff49;
+    border-radius: 50px;
+    margin-top: 50px;
+    border: none;
+    outline: none;
+
+}
+.MkPostWindowSelectEnterButtonText{
+    color: #3c414d;
+    /* color: white; */
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-size: 190%;
+    font-weight: bold;
+}
+.MkPostWindowSelectSelectText{
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-weight: bold;
+    /* color: #3c414d; */
+    color: white;
+}
