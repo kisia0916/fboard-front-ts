@@ -15,6 +15,16 @@ import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 function ThreadPageMain() {
+  interface ThreadPostModule{
+    threadId:String;
+    userId:String;
+    userIcon:String;
+    postImg:String;
+    reply:String;
+    mess:String;
+    threadPostId:String;
+    userName:String;
+}
   const threadListScroll = useRef<any>(null)
   const [loadDone,setLoadDone] = useState<boolean>(false)
   const [ariaHight,setAriaHight] = useState(30)
@@ -24,6 +34,7 @@ function ThreadPageMain() {
   const [nowPushKey,setPushKey] = useState<"Shift"|"">("")
   const [selectFile,setSelectFile] = useState<any>(null)
   const [cookies,setCookie] = useCookies()
+  const [latestPost,setLatestPost] = useState<ThreadPostModule>()
   const minHight:number = 30
   const maxHight:number = 150
   const MainthreadId = useParams().id
@@ -83,9 +94,16 @@ function ThreadPageMain() {
         const pass:string = cookies.pass as string
         const threadId:any = MainthreadId as string
         console.log(userId,mess,pass,threadId)
-        sendMess(mess,userId,pass,threadId)
         if(selectFile !== null){
-          imgUploadFun()
+          imgUploadFun(userId,mess,pass,threadId)
+          changeTrueFalseBaner()
+          // if(postImg !== "error"){
+          //   console.log(postImg)
+          //   sendMess(mess,userId,pass,threadId,setLatestPost)
+          // }
+        }else{
+          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+          sendMess(mess,userId,pass,threadId,setLatestPost,"")
         }
       }
     }
@@ -106,29 +124,38 @@ function ThreadPageMain() {
   // const [fileNameBanerFlg,setFileNameBanerFlg] = useState<boolean>(false)
   const changeFile = (e:any)=>{
     setSelectFile(e.target.files[0])
-    changeTrueFileBaner()
+    if(e.target.files[0]){
+      changeTrueFileBaner()
+    }
   }
-  const imgUploadFun = ()=>{
+  const imgUploadFun = (userId:string,mess:string,pass:string,threadId:string)=>{
     const formData = new FormData()
     formData.append("postimg",selectFile)
     axios.post("http://localhost:5000/threadpost/data/uploadpostimg",formData).then((res)=>{
-      console.log("done")
+      console.log(res)
+      sendMess(mess,userId,pass,threadId,setLatestPost,res.data)
       setSelectFile(null)
+
     }).catch((e)=>{
       console.log(e)
+      
     })
   }
+
+
   const openFileSelecter = ()=>{
     if(selectFileRef){
       selectFileRef.current.click()
     }
   }
   const changeTrueFileBaner = ()=>{
+    console.log("test22")
     setFileInfoBar(true)
     setAriaWarpp(ariaWarpp+25)
   }
   const changeTrueFalseBaner = ()=>{
     setFileInfoBar(false)
+    setSelectFile(null)
     setAriaWarpp(ariaWarpp-25)
   }
   return (
@@ -161,7 +188,7 @@ function ThreadPageMain() {
     <div className='ThreadPageSendSpace'>
       {fileInfobar?<div className='ThreadPageSendBoxFileNameWarpp'>
         <span className='ThreadPageSendBoxFileName'>{selectFile.name}</span>
-        <CloseIcon/>
+        <CloseIcon className='ThreadPageSendBoxFileCloseIcon' style={{fontSize:"140%"}} onClick={changeTrueFalseBaner}/>
 
         </div>:<></>}
       <div className='ThreadPageSendBox' style={{height:`${boxHight}px`}}>

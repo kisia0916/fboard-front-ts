@@ -48,7 +48,7 @@ function LoadThreadPost(props:{loadDone:any}) {
     <div>
       {
         postList.map((i)=>{
-          return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} icon=''/>
+          return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon=''/>
         })
       }
     </div>
