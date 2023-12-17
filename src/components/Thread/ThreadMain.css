@@ -27,6 +27,7 @@
     width: calc(100% - 95px);
 }
 .ThreadRightTop{
+    margin-left: 24px;
     /* display: flex; */
     /* justify-content: space-between; */
 }
@@ -51,7 +52,7 @@
     font-size: 150%;
 
     margin-top:16px;
-    margin-left: 24px;
+    /* margin-left: 24px; */
     font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
 
 }
@@ -67,6 +68,9 @@
     font-size: 120%;
     margin-top: 10px;
     margin-left: 5px;
+}
+.ThreadRightTop{
+
 }
 .ThreadMainRightBottom{
     display: flex;
@@ -129,9 +133,38 @@
 }
 .ThreadMainTagList{
     display: flex;
-    margin-left: 20px;
+    /* margin-left: 20px; */
+
 }
 .ThreadMainRightBottom2{
     display: flex;
     margin-right: 30px;
+}
+.ThreadMainPostType{
+    display: flex;
+    /* width: 100px; */
+    height: 22px;
+    border: solid 1px rgb(224, 255, 47);
+    margin-right: 15px;
+    border-radius: 50px;
+    margin-top: 20px;
+    word-break: break-all !important;
+}
+.ThreadMainPostTypeText{
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 95%;
+    color: white;
+    /* margin: auto; */
+}
+.ThreadMainTitleWarpp{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    /* display: inline-block; */
+    justify-content: space-between;
+    word-break: break-all !important;
+    box-sizing: border-box;
 }

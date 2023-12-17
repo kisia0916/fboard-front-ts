@@ -32,7 +32,11 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
 
             {props.tagList.map((i)=><ThreadTagMain title={i}/>)}
           </div> */}
-          <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>{props.threadTitle}</span>
+          <div className='ThreadMainTitleWarpp'>
+            
+            <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>{props.threadTitle}</span>
+            <div className='ThreadMainPostType'><span className='ThreadMainPostTypeText'>Thread</span></div>
+          </div>
           <div className='ThreadMainTagList'>
 
 {props.tagList.map((i)=><ThreadTagMain title={i}/>)}
