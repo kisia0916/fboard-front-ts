@@ -31,6 +31,9 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
           <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>{props.threadTitle}</span>
           <div className='ThreadMainTagList'>
             <ThreadTagMain/>
+            <ThreadTagMain/>
+            <ThreadTagMain/>
+
           </div>
         </div>
         <div className='ThreadMainRightBottom'>

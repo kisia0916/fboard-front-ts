@@ -181,7 +181,7 @@ function ThreadPageMain() {
         </div>
     </div>
     <div className='ThreadPageMessSpace' ref={threadListScroll} style={{height: `calc(100% - 48px - ${ariaWarpp}px)`}}>
-        {loadDone?<></>:<LoadAni/>}
+        {loadDone?<></>:<LoadAni size='30px'/>}
         <LoadThreadPost loadDone={setLoadDone}/>
     </div>
 

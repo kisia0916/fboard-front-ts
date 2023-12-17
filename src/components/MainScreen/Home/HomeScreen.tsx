@@ -22,7 +22,7 @@ function HomeScreen() {
         <HomeScreenCreateMain/>
         <div className='MainScreenMainSpace'>
           {/*こに新しく追加され他スレっ度を入れる*/}
-          {loadThreadDone?<></>:<LoadAni/>}
+          {loadThreadDone?<></>:<LoadAni size='30px'/>}
           <GetThreadData pageNum={threadPage} loadDone={setThreadDone}/>
           {/*こに新しく読み込まれてスレッドを入れる*/}
         </div>

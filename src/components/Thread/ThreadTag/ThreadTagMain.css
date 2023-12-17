@@ -2,7 +2,7 @@
     height: 26px;
     margin-top: 22px;
     background-color: #353845;
-    margin-right: 25px;
+    margin-right: 5px;
     border-radius: 50px;
     display: flex;
 }
@@ -17,4 +17,5 @@
     margin-top: 3px;
     margin-left: 3px;
     margin-right: 10px;
+    white-space: nowrap;
 }

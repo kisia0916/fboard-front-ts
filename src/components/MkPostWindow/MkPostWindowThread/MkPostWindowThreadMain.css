@@ -106,6 +106,10 @@
     display: flex;
     border: none;
     outline: none;
+    cursor: pointer;
+}
+.MkPostWindowThreadEnterButton:hover{
+    background-color: #edff49bf;
 }
 .MkPostWindowThreadEnterButtonText{
     font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
@@ -187,6 +191,10 @@
     border: none;
     color: #3c414d;
     display: flex;
+    cursor: pointer;
+}
+.MkPostWindowThreadTagAddButton:hover{
+    background-color: #edff49bf;
 }
 .MkPostWindowThreadTagListWarpp{
     width: 80%;
