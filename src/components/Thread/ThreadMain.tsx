@@ -23,23 +23,23 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
   return (
     <Link to={`/thread/${props.threadId}`} style={{ textDecoration: "none" }}>
     <div className='ThreadMain' style={{borderRadius:radStyle}}>
-      <div className='ThreadMainLeft' style={{marginLeft:leftSpace}}>
-          <img src='/photos/unnamed.jpg'  alt='logo' className='ThreadTitleIcon'/>
+    <div className='ThreadMainLeft' style={{marginLeft:leftSpace}}>
+          <img src={props.titleIcon}  alt='logo' className='ThreadTitleIcon'/>
       </div>
       <div className='ThreadMainRight'>
         <div className='ThreadRightTop'>
+        {/* <div className='ThreadMainTagList'>
+
+            {props.tagList.map((i)=><ThreadTagMain title={i}/>)}
+          </div> */}
           <span className='ThreadMainTitleText' style={{fontSize:fontSize,marginTop:fontTop}}>{props.threadTitle}</span>
           <div className='ThreadMainTagList'>
-            <ThreadTagMain/>
-            <ThreadTagMain/>
-            <ThreadTagMain/>
 
-          </div>
+{props.tagList.map((i)=><ThreadTagMain title={i}/>)}
+</div>
         </div>
         <div className='ThreadMainRightBottom'>
-          <img src='/photos/zbnU2dcD_400x400.jpg'  alt='logo' className='ThreadCreateUserIcon'/>
-          <span className='ThreadCreateUserName'>{props.createUserName}</span>
-          <span className='ThreadCreateDataText'> - {<ParseDate data={props.createdDate}></ParseDate>}</span>
+        <div style={{display:"flex"}}>
           <div className='ThreadMainLike'>
               <FavoriteIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
               <span className='ThreadMainLikeNum'>{props.likeNum}</span>
@@ -54,7 +54,14 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
               <span className='ThreadMainPersonText'>10</span>
           </div>
         </div>
+          <div className='ThreadMainRightBottom2'>
+            <img src='/photos/zbnU2dcD_400x400.jpg'  alt='logo' className='ThreadCreateUserIcon'/>
+            <span className='ThreadCreateUserName'>{props.createUserName}</span>
+            <span className='ThreadCreateDataText'> - {<ParseDate data={props.createdDate}></ParseDate>}</span>
+          </div>
+        </div>
       </div>
+
     </div>
     </Link>
   )

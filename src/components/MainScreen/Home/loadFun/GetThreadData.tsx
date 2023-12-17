@@ -14,6 +14,8 @@ interface getThreadInterface{
   postId: string,
   createdAt: string,
   updatedAt: string,
+  threadPhoto:string,
+  tags:string[]
   __v: number,
   likeNum: number
 }
@@ -33,7 +35,7 @@ function GetThreadData(props:{pageNum:number,loadDone:any}) {
     <div>
       {
         threadList.map((i)=>{
-          return <ThreadMain threadTitle={i.title} threadId={i.theradId} likeNum={i.likeNum} userNum={30} postNum={i.messNum} createUserName={i.userName} createdDate={i.createdAt} tagList={[]} titleIcon='' userIcon=''/>
+          return <ThreadMain threadTitle={i.title} threadId={i.theradId} likeNum={i.likeNum} userNum={30} postNum={i.messNum} createUserName={i.userName} createdDate={i.createdAt} tagList={i.tags} titleIcon={i.threadPhoto} userIcon=''/>
         })
       }
     </div>
