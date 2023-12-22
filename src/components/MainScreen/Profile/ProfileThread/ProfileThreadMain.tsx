@@ -4,11 +4,11 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import PersonIcon from '@mui/icons-material/Person';
 import TagIcon from '@mui/icons-material/Tag';
 import "./ProfileThreadMain.css"
-function ProfileThreadMain() {
+function ProfileThreadMain(props:{titlePhoto:string,tagList:string[],}) {
   return (
     <div className='ProfileThreadMain'>
         <div className='ProfileThreadLeft'>
-            <img src='/photos/unnamed.jpg' alt='' className='ProfileThreadIcon'/>
+            <img src={props.titlePhoto} alt='' className='ProfileThreadIcon'/>
         </div>
         <div className='ProfileThreadRight'>
             <div className='ProfileThreadLeftTop'>

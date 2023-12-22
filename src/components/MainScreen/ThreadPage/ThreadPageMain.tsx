@@ -14,6 +14,7 @@ import sendMess from './logi/sendMess';
 import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { SettingsApplications } from '@mui/icons-material';
 function ThreadPageMain() {
   interface ThreadPostModule{
     threadId:String;
@@ -38,9 +39,11 @@ function ThreadPageMain() {
   const minHight:number = 30
   const maxHight:number = 150
   const MainthreadId = useParams().id
+  const [doneFirstScroll,setDoneFirstScroll] = useState<boolean>(false)
   useEffect(()=>{
     const scrollContainer = threadListScroll.current;
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    setDoneFirstScroll(true)
   },[loadDone])
   const pushEnter = (e:any)=>{
     console.log(nowPushKey)
@@ -158,6 +161,29 @@ function ThreadPageMain() {
     setSelectFile(null)
     setAriaWarpp(ariaWarpp-25)
   }
+  const [page,setPage] = useState<number>(0)
+  const [postList,setPostList] = useState<any>([])
+  const [nowLoading,setNowLoading] = useState<boolean>(false)
+  const [rastScroll,setRastScroll] = useState<number>(0)
+  const [nextLoad,setNextLoad] = useState<boolean>(true)
+  const scrollFunction = ()=>{
+    if(doneFirstScroll){
+      if(threadListScroll.current.scrollTop/*+ threadListScroll.current.clientHeight*/<10/*(threadListScroll.current.scrollHeight/10)*6*/  && !nowLoading && nextLoad){
+        setNowLoading(true)
+        setRastScroll(threadListScroll.current.scrollHeight-(threadListScroll.current.scrollTop-threadListScroll.current.clientHeight))
+        setPage(page+1)
+        
+      }
+    }
+  }
+
+  useEffect(()=>{
+    if(nowLoading){
+      threadListScroll.current.scrollTop = threadListScroll.current.scrollHeight - (rastScroll-threadListScroll.current.clientHeight)
+    }
+    setNowLoading(false)
+
+  },[postList])
   return (
     <div className='MainScreen'>
       {/* <input type='file' onChange={changeFile}></input> */}
@@ -180,9 +206,10 @@ function ThreadPageMain() {
             <span className='ThreadPageTopRightMessText'>12</span>
         </div>
     </div>
-    <div className='ThreadPageMessSpace' ref={threadListScroll} style={{height: `calc(100% - 48px - ${ariaWarpp}px)`}}>
+    <div className='ThreadPageMessSpace' ref={threadListScroll} onScroll={scrollFunction} style={{height: `calc(100% - 48px - ${ariaWarpp}px)`}}>
         {loadDone?<></>:<LoadAni size='30px' top='30px'/>}
-        <LoadThreadPost loadDone={setLoadDone}/>
+        {nowLoading?<LoadAni size='30px' top='30px'/>:<></>}
+        <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad}/>
     </div>
 
     <div className='ThreadPageSendSpace'>

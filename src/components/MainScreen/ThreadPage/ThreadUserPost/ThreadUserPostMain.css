@@ -3,6 +3,7 @@
     /* height: 63px; */
     display: flex;
     margin-top: 0px;
+    
 }
 .ThreadUserPostMain:hover{
     background-color: #383a47db;;
@@ -68,7 +69,7 @@
     display: flex;
     margin-left: 15px;
     margin-top: 2px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 
 }
 .ThreadPageSendTextAria{

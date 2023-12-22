@@ -71,14 +71,14 @@ function ProfileMain() {
                 </div>
             </div>
             <div className='ProfileRightMainSpace'>
+              {/* <ProfileThreadMain titlePhoto='http://localhost:5000/public/img/thread/c4c24eae-8088-4bc2-a707-bdc6fa420b83.png' tagList={["テスト投稿","プログラミング","開発テスト"]}/> */}
+              {/* <ProfileThreadMain/>
               <ProfileThreadMain/>
               <ProfileThreadMain/>
               <ProfileThreadMain/>
               <ProfileThreadMain/>
               <ProfileThreadMain/>
-              <ProfileThreadMain/>
-              <ProfileThreadMain/>
-              <ProfileThreadMain/>
+              <ProfileThreadMain/> */}
 
  
 

@@ -62,10 +62,10 @@ function ProfileSeMain() {
               </div>
           </div>
           <div className='ProfileSeMainCons'>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
+          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["プログラミング","卒論","開発テスト"]} titleIcon='http://localhost:5000/public/img/thread/c4c24eae-8088-4bc2-a707-bdc6fa420b83.png' userIcon=''/>
+          <ThreadMain threadTitle='SNSを個人で開発してみた' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["Node.js","React","プログラミング"]} titleIcon='http://localhost:3000/photos/zbnU2dcD_400x400.jpg' userIcon=''/>
+          <ThreadMain threadTitle='アドベントカレンダーを描いてみたい' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["卒論","プログラミング","雑談"]} titleIcon='http://localhost:5000/public/img/f9a0a103-9421-473b-8de3-1bdddb676f3a.jpg' userIcon=''/>
+          <ThreadMain threadTitle='自作PCにつけられるグラボを探そう' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["自作PC","GPU","雑談"]} titleIcon='http://localhost:5000/public/img/b379be33-d3d1-4c9b-afd4-4513a5d88720.jpg' userIcon=''/>
           <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
           <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
           <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' likeNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''/>
