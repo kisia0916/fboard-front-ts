@@ -42,6 +42,9 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
       }).then((res)=>{
         console.log(res.data)
         console.log(props.page)
+        res.data.map((i:any)=>{
+          
+        },[])
         if(res.data.length>0){
             console.log("爆発")
             console.log(res.data[res.data.length-1].isFirst)
@@ -63,7 +66,7 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
     <div>
       {
         postList.map((i:any)=>{
-          return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon=''/>
+          return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon='' reply={i.reply}/>
         })
       }
     </div>

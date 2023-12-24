@@ -1,6 +1,8 @@
 .App{
     display: flex;
-    width: 100vw;
+    width: 1540px;
+    /* max-width: 1800px; */
+    margin: auto;
 }
 .AppWarpp{
     display: flex;

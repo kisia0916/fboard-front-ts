@@ -1,12 +1,16 @@
 .UserInfoMain{
     /* position:absolute; */
     height: 60px;
-    width: 100%;
+    width: 90%;
     min-width: 240px;
     display: flex;
-    border-top: solid 1px #3d3f4d;
-    background-color: #303443;
+    margin: auto;
+    /* border-top: solid 1px #3d3f4d; */
+    /* background-color: #303443; */
     justify-content: space-between;
+    border-radius: 40px;
+
+    
 
 }
 .UserInfoMainIcon{

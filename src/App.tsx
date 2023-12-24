@@ -18,10 +18,11 @@ function App() {
   const [mkPostWindowState,setMkPostWindowState] = useState<string>("")
   const [mkPostTitle,setMkPostTitle] = useState("")
   return (
-    <div className="App">
-      <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
+    <>    <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
       <mkPostWindowContext.Provider value={{mkPostWindowState,setMkPostWindowState,mkPostTitle,setMkPostTitle}}>
-          <MkPostWindowMain mkstate={mkPostWindowState}/>
+        <MkPostWindowMain mkstate={mkPostWindowState}/>
+        <div className="App">
+
           <div className='AppWarpp'>
           {/* <MkPostWindowMain/> */}
               {/* <LeftBar/> */}
@@ -39,8 +40,11 @@ function App() {
                 </BrowserRouter>:<></>}
               {/* <RightBar/> */}
           </div>
+       <div/>
+       </div>
        </mkPostWindowContext.Provider>
-    </div>
+       </>
+
   );
 }
 

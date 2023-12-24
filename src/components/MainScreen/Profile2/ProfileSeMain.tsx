@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import "./ProfileSeMain.css"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TextsmsIcon from '@mui/icons-material/Textsms';
@@ -7,6 +7,7 @@ import ThreadUserPostMain from '../ThreadPage/ThreadUserPost/ThreadUserPostMain'
 import ThreadMain from '../../Thread/ThreadMain';
 
 function ProfileSeMain() {
+  const profileImgRef = useRef<any>()
   return (
     <div className='ProfileSeMain'>
         <div className='ProfileSeTopBar'>
@@ -23,8 +24,8 @@ function ProfileSeMain() {
             <span className='ProfileUserNumText'>12</span>
           </div>
         </div>
-        <div className='ProfileSeTopSpace'>
-            <img src='/photos/header.jpg' alt='' className='ProfileSeTopHeaderImg'/>
+        <div className='ProfileSeTopSpace' ref={profileImgRef}>
+            <img src='/photos/header.jpg' alt='' className='ProfileSeTopHeaderImg' style={{width:profileImgRef.current.offsetWidth}}/>
             <div className='ProfileSeTopIconWarpp'></div>
             <div className='ProfileSeTopUserText'>
               <span className='ProfileSeTopUserName'>fumi@admin</span>

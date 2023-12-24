@@ -14,7 +14,7 @@
 .PageTitleText{
     color: #edff57;
     font-size: 210%;
-    margin-left: 30px;
+    margin-left: 36px;
     margin-top: 5px;
     font-weight: bolder;
     font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -27,13 +27,13 @@ font-family: 'Nunito', sans-serif;
 }
 .LeftBarMainWarpp{
     width: 100%;
-    height: calc(100vh - 79px);
+    height: calc(100vh - 90px);
 }
 .LeftSpaceLine{
-    width: 90%;
+    width: 80%;
     height: 1px;
     background-color: #3d3f4d;
     margin: auto;
     border-radius: 50px;
-    margin-top: 45px;
+    margin-top: 40px;
 }

@@ -19,6 +19,7 @@ function LeftBar() {
         <PageButtons buttonText='Notification' icon={<NotificationsIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} />
         <PageButtons buttonText='Friends' icon={<PeopleAltIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} />
         <PageButtons buttonText='JoinedThread' icon={<DownloadDoneIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} />
+        <PageButtons buttonText='LikeBlog' icon={<DownloadDoneIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} />
         <PageButtons buttonText='Profile' icon={<AccountBoxIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} />
 
 
