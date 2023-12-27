@@ -36,6 +36,7 @@
 }
 .ThreadUserPostProButton{
     display: none;
+    cursor: pointer;
 }
 .ThreadUserPostUserRight{
     width: calc(100% - 3.68% - 44px);

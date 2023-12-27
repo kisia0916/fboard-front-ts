@@ -1,13 +1,13 @@
 import axios from "axios"
 
-const sendMess = (mess:string,userId:string,pass:string,threadId:string,changeLatest:any,imgPath:string)=>{
+const sendMess = (mess:string,userId:string,pass:string,threadId:string,changeLatest:any,imgPath:string,reply:string)=>{
     axios.post("http://localhost:5000/threadpost/data/createthreadpost",{
         userId:userId,
         userPass:pass,
         threadId:threadId,
         posttitle:mess,
         hashFlg:false,
-        reply:"",
+        reply:reply,
         postImg:imgPath
     }).then((res)=>{
         console.log(res.data)

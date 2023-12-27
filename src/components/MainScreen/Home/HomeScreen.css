@@ -1,6 +1,6 @@
 .MainScreen{
     width: calc(100% - 290px - 360px);
-    /* min-width: 600px; */
+    min-width: 680px;
     height: 100vh;
     /* background-color: red; */
     /* border-left: solid #373946 1px;

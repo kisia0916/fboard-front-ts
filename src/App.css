@@ -1,6 +1,7 @@
 .App{
     display: flex;
-    width: 1540px;
+    max-width: 1540px;
+    width: 100vw;
     /* max-width: 1800px; */
     margin: auto;
 }

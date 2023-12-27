@@ -14,8 +14,9 @@ import sendMess from './logi/sendMess';
 import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { SettingsApplications } from '@mui/icons-material';
+import RepryBar from './RepryPost/RepryBar/RepryBar';
 function ThreadPageMain() {
+  console.log("再描画されました２")
   interface ThreadPostModule{
     threadId:String;
     userId:String;
@@ -32,22 +33,30 @@ function ThreadPageMain() {
   const [ariaWarpp,setAriaWarpp] = useState(80)
   const [boxHight,setBoxHight] = useState(52)
   const [nowTextValue,setTextValue] = useState("")
-  const [nowPushKey,setPushKey] = useState<"Shift"|"">("")
+  const textValueRef = useRef<any>("")
+  const nowPushKey = useRef<"Shift"|"">()
   const [selectFile,setSelectFile] = useState<any>(null)
   const [cookies,setCookie] = useCookies()
   const [latestPost,setLatestPost] = useState<ThreadPostModule>()
+  const [nowReply,setNowReply] = useState<any>({postId:"",userName:""})
   const minHight:number = 30
   const maxHight:number = 150
   const MainthreadId = useParams().id
   const [doneFirstScroll,setDoneFirstScroll] = useState<boolean>(false)
   useEffect(()=>{
     const scrollContainer = threadListScroll.current;
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-    setDoneFirstScroll(true)
+    if(scrollContainer.scrollHeight !== scrollContainer.clientHeight){
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      console.log(threadListScroll.current.scrollTop+threadListScroll.current.clientHeight)
+      console.log(threadListScroll.current.scrollHeight)
+      setDoneFirstScroll(true)
+    }
+    console.log("ふくふく")
   },[loadDone])
   const pushEnter = (e:any)=>{
     console.log(nowPushKey)
-    if(e.key === "Enter" && nowPushKey === "Shift"){
+    if(e.key === "Enter" && nowPushKey.current === "Shift"){
+        setReplyCounter((replyCounter)=>replyCounter+1)
       if(maxHight>=ariaHight+30){
         setAriaHight(ariaHight+30)
         setAriaWarpp(ariaWarpp+30)
@@ -55,15 +64,16 @@ function ThreadPageMain() {
       }
     }else if(e.key === "Backspace"){
       console.log(nowTextValue)
-      const lines = nowTextValue.split('\n');
-      const currentLine = nowTextValue.substr(0, e.target.selectionStart).split('\n').length;
+      const lines = textValueRef.current.value.split('\n');
+      const currentLine = textValueRef.current.value.substr(0, e.target.selectionStart).split('\n').length;
       if(minHight<=ariaHight-30 && lines[currentLine - 1].trim() === ''){
           setAriaHight(ariaHight-30)
           setAriaWarpp(ariaWarpp-30)
           setBoxHight(boxHight-30)
       }
     }else if(e.key === "Shift"){
-      setPushKey("Shift")
+      // setPushKey("Shift")
+      nowPushKey.current = "Shift"
     }else if(e.key === "Enter"){
       e.preventDefault()
       let testvalue:string = e.target.value.replace(/[\r\n]+/g, '')
@@ -89,6 +99,7 @@ function ThreadPageMain() {
       console.log(nowText)
       if (testvalue.length>0){
         setTextValue("")
+        textValueRef.current.value = ""
         setAriaHight(30)
         setAriaWarpp(80)
         setBoxHight(52)
@@ -100,13 +111,10 @@ function ThreadPageMain() {
         if(selectFile !== null){
           imgUploadFun(userId,mess,pass,threadId)
           changeTrueFalseBaner()
-          // if(postImg !== "error"){
-          //   console.log(postImg)
-          //   sendMess(mess,userId,pass,threadId,setLatestPost)
-          // }
         }else{
           console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa")
-          sendMess(mess,userId,pass,threadId,setLatestPost,"")
+          sendMess(mess,userId,pass,threadId,setLatestPost,"",nowReply.postId)
+          closeReplyBar()
         }
       }
     }
@@ -114,20 +122,23 @@ function ThreadPageMain() {
   const upEnter = (e:any)=>{
     if(e.key === "Shift"){
       console.log("up")
-      setPushKey("")
+      nowPushKey.current = ""
       // nowPushKey = ""
     }
   }
-  const chengeTextValue = (e:any)=>{
-    setTextValue(e.target.value)
-  }
   //画像処理関連
-  const selectFileRef:any = useRef(null)
+  const selectFileRef = useRef<any>(null)
   const [fileInfobar,setFileInfoBar] = useState(false)
+  const [replybar,setReplyBar] = useState(false)
+  const [replyCounter,setReplyCounter] = useState<number>(0)
+
+
   // const [fileNameBanerFlg,setFileNameBanerFlg] = useState<boolean>(false)
   const changeFile = (e:any)=>{
+    console.log("change")
     setSelectFile(e.target.files[0])
     if(e.target.files[0]){
+      console.log("動いてます")
       changeTrueFileBaner()
     }
   }
@@ -136,9 +147,9 @@ function ThreadPageMain() {
     formData.append("postimg",selectFile)
     axios.post("http://localhost:5000/threadpost/data/uploadpostimg",formData).then((res)=>{
       console.log(res)
-      sendMess(mess,userId,pass,threadId,setLatestPost,res.data)
+      sendMess(mess,userId,pass,threadId,setLatestPost,res.data,nowReply.postId)
       setSelectFile(null)
-
+      closeReplyBar()
     }).catch((e)=>{
       console.log(e)
       
@@ -157,12 +168,41 @@ function ThreadPageMain() {
     setAriaWarpp(ariaWarpp+25)
   }
   const changeTrueFalseBaner = ()=>{
+    console.log("debug")
     setFileInfoBar(false)
     setSelectFile(null)
+    console.log(selectFileRef.current)
     setAriaWarpp(ariaWarpp-25)
+  }
+  const changeTrueReplyBaner = ()=>{
+    console.log("test22")
+    setReplyBar(true)
+    setAriaWarpp(ariaWarpp+25)
+
+  }
+  const changeTrueFalseReplyBaner = ()=>{
+
+  }
+  const closeReplyBar = ()=>{
+    setNowReply({postId:"",userName:""})
+    if(replybar){
+      setAriaWarpp(ariaWarpp-25)
+    }
+    setReplyBar(false)
+    
+    console.log("error")
+  }
+  const pushReplyButton = ()=>{
+    if(replybar){
+      changeTrueFalseReplyBaner()
+
+    }else{
+      changeTrueReplyBaner()
+    }
   }
   const [page,setPage] = useState<number>(0)
   const [postList,setPostList] = useState<any>([])
+  const [postRepList,setPostRepList] = useState<any>([])
   const [nowLoading,setNowLoading] = useState<boolean>(false)
   const [rastScroll,setRastScroll] = useState<number>(0)
   const [nextLoad,setNextLoad] = useState<boolean>(true)
@@ -184,9 +224,22 @@ function ThreadPageMain() {
     setNowLoading(false)
 
   },[postList])
+  useEffect(()=>{
+    console.log("kokoeo")
+    console.log(postRepList)
+  },[postRepList])
+  
+  const replyCountUpFun = ()=>{
+    setReplyCounter((replyCounter)=>replyCounter+1)
+    console.log(replyCounter)
+  }
+  useEffect(()=>{
+    console.log(replyCounter)
+    
+  },[replyCounter])
+
   return (
     <div className='MainScreen'>
-      {/* <input type='file' onChange={changeFile}></input> */}
     <div className='MainScreenTop'>
       <div className='MainScreenTopWarpp'>
         <div className='MainScreenTopTexts'>
@@ -206,26 +259,31 @@ function ThreadPageMain() {
             <span className='ThreadPageTopRightMessText'>12</span>
         </div>
     </div>
-    <div className='ThreadPageMessSpace' ref={threadListScroll} onScroll={scrollFunction} style={{height: `calc(100% - 48px - ${ariaWarpp}px)`}}>
-        {loadDone?<></>:<LoadAni size='30px' top='30px'/>}
-        {nowLoading?<LoadAni size='30px' top='30px'/>:<></>}
-        <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad}/>
-    </div>
-
+    <div style={{width:"100%",height: `calc(100% - 48px - ${ariaWarpp}px)`,position:"relative"}}>
+      {loadDone && doneFirstScroll?<></>:<div style={{height:"100%", width:"100%",position:"absolute",backgroundColor:"#282a36"}}></div>}
+      <div className='ThreadPageMessSpace' ref={threadListScroll} onScroll={scrollFunction} style={{height:"100%"}}>
+          {loadDone?<></>:<LoadAni size='30px' top='30px'/>}
+          {nowLoading?<LoadAni size='30px' top='30px'/>:<></>}
+          <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad} repList={postRepList} setRepList={setPostRepList} setReply={setNowReply} changeReply={pushReplyButton} replyCounterFun={replyCountUpFun} replyCounter={replyCounter}/>
+      </div>
+      </div>
     <div className='ThreadPageSendSpace'>
       {fileInfobar?<div className='ThreadPageSendBoxFileNameWarpp'>
         <span className='ThreadPageSendBoxFileName'>{selectFile.name}</span>
         <CloseIcon className='ThreadPageSendBoxFileCloseIcon' style={{fontSize:"140%"}} onClick={changeTrueFalseBaner}/>
 
         </div>:<></>}
+      {replybar?<RepryBar isTopFlg={fileInfobar} userName={nowReply.userName} closeReplyBar={closeReplyBar}/>:<></>}
       <div className='ThreadPageSendBox' style={{height:`${boxHight}px`}}>
       
           <div className='ThreadPageSendBoxImgIconButton' style={{width:"80px",display:"flex"}}>
-              <input type='file' ref={selectFileRef} onChange={changeFile} style={{display:"none"}}/>
-              <ImageIcon className='ThreadPageSendBoxImgIcon' onClick={openFileSelecter} style={{fontSize:"170%",margin:"auto"}}/>
+              <input type='file' ref={selectFileRef} onChange={changeFile} style={{display:"none"}} key={selectFileRef.current ? selectFileRef.current.value : null}/>
+              <ImageIcon className='ThreadPageSendBoxImgIcon' onClick={openFileSelecter} style={{fontSize:"170%",margin:"auto"}}/
+              >
           </div>
         <div className='ThreadPageSendTextBox' >
-          <textarea  className='ThreadPageSendTextAria' value={nowTextValue} placeholder='Send mess' onChange={chengeTextValue} style={{height:`${ariaHight}px`}} onKeyDown={pushEnter} onKeyUp={upEnter}/>
+          {/* <SendBox nowTextValue={nowTextValue} changeTextValue={chengeTextValue} ariaHight={ariaHight} pushEnter={pushEnter} upEnter={upEnter}/> */}
+          <textarea  className='ThreadPageSendTextAria' placeholder='Send mess' /*onChange={chengeTextValue}*/ ref={textValueRef} style={{height:`${ariaHight}px`}} onKeyDown={pushEnter} onKeyUp={upEnter}/>
           {/* <span className='ThreadPageSendTextBoxHintText'>Send Message</span> */}
         </div>
         <div style={{display:"flex"}}>

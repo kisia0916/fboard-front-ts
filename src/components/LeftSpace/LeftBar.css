@@ -2,6 +2,7 @@
 .LeftBarMain{
     width: 290px;
     height: 100vh;
+    min-width: 280px;
 }
 .PageTitle{
     width: 100px;

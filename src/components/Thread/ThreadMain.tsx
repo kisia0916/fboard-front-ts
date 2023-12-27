@@ -4,6 +4,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThreadTagMain from './ThreadTag/ThreadTagMain';
 import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Link } from 'react-router-dom';
 import ParseDate from '../../logics/ParseDate';
 function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,threadTitle:string,likeNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string}) {
@@ -45,7 +46,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
         <div className='ThreadMainRightBottom'>
         <div style={{display:"flex"}}>
           <div className='ThreadMainLike'>
-              <FavoriteIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
+              <PersonAddIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
               <span className='ThreadMainLikeNum'>{props.likeNum}</span>
           </div>
           <div className='ThreadMainMess'>

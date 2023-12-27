@@ -1,34 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./RepryPostMain.css"
 import axios from 'axios'
+import ParseDate from '../../../../logics/ParseDate'
 
-function RepryPostMain(props:{replyId:string}) {
-
-  const heightRef = useRef<any>()
+function RepryPostMain(props:{title:string,icon:string,name:string,photo:string,createdAt:string,loadReplyCom:any}) {
   const [userLoadDone,setUserLoadDone] = useState<boolean>(true)
-  const [replyIcon,setReplyIcon] = useState<string>("")
-  const [replyName,setReplyName] = useState<string>("")
-  const [replyTitle,setReplyTitle] = useState<string>("")
-  const [replyImg,setReplyImg] = useState<string>("")
+  const [replyIcon,setReplyIcon] = useState<string>(props.icon)
+  const [replyName,setReplyName] = useState<string>(props.name)
+  const [replyTitle,setReplyTitle] = useState<string>(props.title)
+  const [replyImg,setReplyImg] = useState<string>(props.photo)
   const [postloadDone,setpostLoadDone] = useState<boolean>(false)
 
-  const getReplyPost = ()=>{
-    axios.post("http://localhost:5000/threadpost/data//getonethreadpost",{
-      postId:props.replyId
-    }).then((res)=>{
-      if(res){
-        setReplyIcon(res.data.userIcon)
-        setReplyName(res.data.userName)
-        setReplyImg(res.data.postImg)
-        setReplyTitle(res.data.mess)
-        setpostLoadDone(true)
-      }
-    }).catch((error:Error)=>{
-      console.log(error)
-    })
-  }
   const loadDone = ()=>{
     setUserLoadDone(false)
+    // setpostLoadDone(true)
   }
   const [ImgDom,setImgDom] = useState<JSX.Element>(<div className="RepryPostLoading" style={{width:"300px",height:"60px",borderRadius:"20px",marginLeft:"12px"}}></div>)
 
@@ -39,10 +24,16 @@ function RepryPostMain(props:{replyId:string}) {
       }
     }
   },[userLoadDone])
+
   useEffect(()=>{
-    getReplyPost()
+    console.log("リプライが描画されました")
+    console.log("リプライログ")
+    // console.log(props.replyCounter)
+    props.loadReplyCom()
+    setpostLoadDone(true)
+    // props.setReplyCounter(props.replyCounter+1)
   },[])
-  
+
   return (////////////////////////////////loadFunで返信も取得しとく
     <>
       {postloadDone?<div className='RepryPostMain'>
@@ -51,6 +42,9 @@ function RepryPostMain(props:{replyId:string}) {
               <div className='RepryPostTop'>
                   <img src={replyIcon} alt='' className='RepryPostIcon'/>
                   <span className='RepryPostName'>{replyName}</span>
+                  <div className='RepryPostDate'>
+                    <> - </><ParseDate data={props.createdAt}/>
+                  </div>
                   <div className='RepryPostIcon2'>
                       <span className='RepryIcon2Text'>re</span>
                   </div>
@@ -58,7 +52,7 @@ function RepryPostMain(props:{replyId:string}) {
               <div>
                 <span className='RepryPostTitle'>{replyTitle}</span>
               </div>
-              {true?ImgDom:<></>}
+              {replyImg?ImgDom:<></>}
               {replyImg?<img src={replyImg} onLoad={loadDone} alt='' className='ReryPostImg'/>:<></>}
           </div>
       </div>:<div className='RepryPostLoading' style={{height:""}}></div>}

@@ -88,7 +88,8 @@
     display: flex;
 }
 .ThreadMainLikeIcon{
-    color: #edff49;
+    /* color: #edff49; */
+    color: white;
     margin-top: 2px;
     margin-left: 5px;
 }

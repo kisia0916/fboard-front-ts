@@ -41,14 +41,20 @@
     display: flex;
     font-size: 80%;
     margin-top: 4px;
-    margin-left:5px;
+    margin-left:6px;
 }
 .RepryIcon2Text{
     margin: auto;
     color: #282a36;
 }
 .ReryPostImg{
-    max-height: 60px;
+    max-height: 90px;
     border-radius: 5px;
-    margin-left: 8px;
+    margin-left: 9px;
+    margin-top: 10px;
+}
+.RepryPostDate{
+    font-size: 90%;
+    margin-top: 4px;
+    margin-left: 4px;
 }
