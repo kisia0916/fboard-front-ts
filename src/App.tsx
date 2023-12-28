@@ -30,11 +30,11 @@ function App() {
                 <BrowserRouter>
                   {loginState?<LeftBar/>:<></>}
                   <Routes>
-                    <Route path='/' element={loginState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>}/>
-                    <Route path='/login' element={loadState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>} />
-                    <Route path='/home' element={loginState?<Home/>:<Navigate replace to="/login"/>}/>
-                    <Route path='/thread/:id' element={<ThreadPage/>}/>
-                    <Route path='/profile' element={<ProfileSeMain/>}/>
+                      <Route path='/' element={loginState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>}/>
+                      <Route path='/login' element={loadState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>} />
+                      <Route path='/home' element={loginState?<Home/>:<Navigate replace to="/login"/>}/>
+                      <Route path='/thread/:id' element={<ThreadPage/>}/>
+                      <Route path='/profile' element={<ProfileSeMain/>}/>
                   </Routes>
                   {loginState?<RightBar/>:<></>}
                 </BrowserRouter>:<></>}

@@ -7,7 +7,8 @@ import GetThreadData from './loadFun/GetThreadData';
 import LoadAni from '../../amimations/Load/LoadAni';
 import MkPostWindowMain from '../../MkPostWindow/MkPostWindowMain';
 import InfiniteScroll from 'react-infinite-scroller';
-import { getThreadList } from './loadFun/getThreadFun';
+import { checkJoined, getThreadList } from './loadFun/getThreadFun';
+import { useCookies } from 'react-cookie';
 
 function HomeScreen() {
   const [threadPage,setThreadPage] = useState<number>(0)
@@ -16,7 +17,11 @@ function HomeScreen() {
   const [loadStart,setLoadStart] = useState<boolean>(false)
   const [threadList,setThreadList] = useState<any[]>([])
   const [rastFlg,setRastFlg] = useState<boolean>(false)
-  const scrollRef = useRef(null)
+  const [joinLoadDone,setJoinLoadDone] = useState<boolean>(false)
+  const [checkJoinedList,setCheckJoinedList] = useState<any>([])
+  const [cookies,setCookie] = useCookies()
+
+  const scrollRef = useRef(null) 
   const scrollFun = ()=>{
     const sc:any = scrollRef.current
     console.log(sc.scrollTop)
@@ -31,7 +36,14 @@ function HomeScreen() {
   useEffect(()=>{
 
     getThreadList(0,threadList,setThreadList,setThreadDone,false,false,setThreadPage)
+
   },[])
+  useEffect(()=>{
+    if(loadThreadDone && threadList.length>0){
+      const userId = cookies.userId
+      checkJoined(threadList,userId,setJoinLoadDone,setCheckJoinedList)
+    }
+  },[loadThreadDone,threadList])
   return (
     <div className='MainScreen'>
       <div className='MainScreenTop'>
@@ -44,9 +56,9 @@ function HomeScreen() {
         <HomeScreenCreateMain/>
         <div className='MainScreenMainSpace' >
           {/*こに新しく追加され他スレっ度を入れる*/}
-          {loadThreadDone?<></>:<LoadAni size='30px' top='30px'/>}
-          <GetThreadData threadList={threadList} /*pageNum={threadPage} loadDone={setThreadDone} setLoadStart={setLoadStart}*//>
-          {loadNextPageDone?<LoadAni size='30px' top='10px'/>:<></>}
+          {loadThreadDone && joinLoadDone?<></>:<LoadAni size='30px' top='30px'/>}
+          {loadThreadDone && joinLoadDone?<GetThreadData threadList={threadList} checkJoinedList={checkJoinedList}/*pageNum={threadPage} loadDone={setThreadDone} setLoadStart={setLoadStart}*//>:<></>}
+          {loadNextPageDone && joinLoadDone?<LoadAni size='30px' top='10px'/>:<></>}
           {/*こに新しく読み込まれてスレッドを入れる*/}
         </div>
       </div>

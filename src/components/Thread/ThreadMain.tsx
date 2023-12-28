@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ThreadMain.css"
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThreadTagMain from './ThreadTag/ThreadTagMain';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ParseDate from '../../logics/ParseDate';
-function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,threadTitle:string,likeNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string}) {
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import LoadMiniMain from '../amimations/LoadMini/LoadMiniMain';
+import LoadMiniMini from '../amimations/LoadMiniMini/LoadMiniMini';
+function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,threadTitle:string,joinNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string,isJoined:any}) {
+  const [cookies,setCookie] = useCookies()
+  const [canPushJoinButton,setCanPushJoinButton] = useState<boolean>(true)
   let radStyle:string = ""
   let leftSpace:string = ""
   let fontSize:string = ""
@@ -21,6 +27,37 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
     fontSize = "153%"
     fontTop = "17px"
   }
+  const [joinedColor,setJoinedColor] = useState<string>("white")
+  const [joinNum,setJoinNum] = useState(props.joinNum)
+  const [joinedBorderColor,setJoinedBorderColor] = useState<string>("rgba(0,0,0,0)")
+
+  const pusjJoin = (e:any)=>{
+    e.preventDefault();
+    if(canPushJoinButton){
+      setCanPushJoinButton(false)
+      axios.post("http://localhost:5000/thread/data/threadjoin",{
+        userId:cookies.userId,
+        threadId:props.threadId,////////////////////ここまで書いた
+        pass:cookies.pass,
+        hashFlg:false
+      }).then((res)=>{
+        if(res.data === "join"){
+          setJoinedBorderColor("#edff49")
+          setJoinNum((joinNum)=>joinNum+1)
+        }else if(res.data === "delete"){
+          setJoinedBorderColor("rgba(0,0,0,0)")
+          setJoinNum((joinNum)=>joinNum-1) 
+        }
+        setCanPushJoinButton(true)
+      })
+    }
+  }
+  useEffect(()=>{
+    if(props.isJoined){
+      setJoinedColor("#edff49")
+      setJoinedBorderColor("#edff49")
+    }
+  },[])
   return (
     <Link to={`/thread/${props.threadId}`} style={{ textDecoration: "none" }}>
     <div className='ThreadMain' style={{borderRadius:radStyle}}>
@@ -45,10 +82,11 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
         </div>
         <div className='ThreadMainRightBottom'>
         <div style={{display:"flex"}}>
-          <div className='ThreadMainLike'>
-              <PersonAddIcon className='ThreadMainLikeIcon' style={{fontSize:"130%"}}/>
-              <span className='ThreadMainLikeNum'>{props.likeNum}</span>
-          </div>
+          <button className='ThreadMainLike' style={{border:`solid 1px ${joinedBorderColor}`}} onClick={pusjJoin}>
+              {canPushJoinButton?<>
+                <PersonAddIcon className='ThreadMainLikeIcon' style={{fontSize:"145%"}}/>
+              <span className='ThreadMainLikeNum' >{joinNum}</span></>:<LoadMiniMini/>}
+          </button>
           <div className='ThreadMainMess'>
               <ChatBubbleIcon className='ThreadMainMessIcon' style={{fontSize:"140%"}}/>
               <span className='ThreadMainMessNum'>{props.postNum}</span>

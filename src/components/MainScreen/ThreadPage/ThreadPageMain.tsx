@@ -45,7 +45,10 @@ function ThreadPageMain() {
   const [doneFirstScroll,setDoneFirstScroll] = useState<boolean>(false)
   useEffect(()=>{
     const scrollContainer = threadListScroll.current;
-    if(scrollContainer.scrollHeight !== scrollContainer.clientHeight){
+    console.log(threadListScroll.current.scrollHeight)
+    console.log(threadListScroll.current.clientHeight)
+    // if(scrollContainer.scrollHeight !== scrollContainer.clientHeight){
+    if(loadDone){
       scrollContainer.scrollTop = scrollContainer.scrollHeight;
       console.log(threadListScroll.current.scrollTop+threadListScroll.current.clientHeight)
       console.log(threadListScroll.current.scrollHeight)

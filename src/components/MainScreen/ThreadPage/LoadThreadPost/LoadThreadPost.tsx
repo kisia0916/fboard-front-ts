@@ -60,6 +60,9 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
         })
         setPostList([...res.data.reverse(),...postList])
         props.setScrollList([...res.data.reverse(),...postList])
+        if(replyCounter2 === 0){
+          props.loadDone(true)
+        }
         setPostLoadDone(true)
       })
     }
@@ -80,6 +83,8 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
   return (
     <div>
       {replyCountDone?postList.map((i:any)=>{
+        console.log("bilyougasareta")
+        console.log(postList)
         return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon='' reply={i.reply} postId={i.threadPostId} setReply={props.setReply} changeReply={props.changeReply} loadReply={loadReplyCounter} setLoadReply={setLoadReplyCounter} loadReplyCom ={props.replyCounterFun}/>
       }):<></>}
     </div>
