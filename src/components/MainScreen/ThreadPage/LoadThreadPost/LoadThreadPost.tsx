@@ -19,7 +19,7 @@ interface threadPostType{
 }
 let replyCounter2:number = 0
 
-function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,page:number,setPage:React.Dispatch<React.SetStateAction<number>>,setScrollList:React.Dispatch<React.SetStateAction<any>>,setnextLoad:React.Dispatch<React.SetStateAction<any>>,nextLoad:boolean,repList:any,setRepList:React.Dispatch<React.SetStateAction<any>>,setReply:React.Dispatch<React.SetStateAction<any>>,changeReply:any,replyCounterFun:any,replyCounter:number}) {
+function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,page:number,setPage:React.Dispatch<React.SetStateAction<number>>,setScrollList:React.Dispatch<React.SetStateAction<any>>,setnextLoad:React.Dispatch<React.SetStateAction<any>>,nextLoad:boolean,repList:any,setRepList:React.Dispatch<React.SetStateAction<any>>,setReply:React.Dispatch<React.SetStateAction<any>>,changeReply:any,replyCounterFun:any,replyCounter:number,doneFirstScroll:boolean}) {
   console.log("再描画されました")
   const thradId = useParams().id
   const [postList,setPostList] = useState<any>(props.scrollList)
@@ -85,7 +85,15 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
       {replyCountDone?postList.map((i:any)=>{
         console.log("bilyougasareta")
         console.log(postList)
-        return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon='' reply={i.reply} postId={i.threadPostId} setReply={props.setReply} changeReply={props.changeReply} loadReply={loadReplyCounter} setLoadReply={setLoadReplyCounter} loadReplyCom ={props.replyCounterFun}/>
+        let postImgInfoCheck:string = ""
+        if(i.postImgInfo){
+          if(i.postImgInfo.height<300){
+            postImgInfoCheck = `${i.postImgInfo.height}px` 
+          }else{
+            postImgInfoCheck = "300px"
+          }
+        }
+        return <ThreadUserPostMain userName={i.userName} date={i.createdAt} title={i.mess} imgPath={i.postImg} icon='' reply={i.reply} postId={i.threadPostId} setReply={props.setReply} changeReply={props.changeReply} loadReply={loadReplyCounter} setLoadReply={setLoadReplyCounter} loadReplyCom ={props.replyCounterFun} firstScrollDone={props.doneFirstScroll} potoInfoImg={postImgInfoCheck}/>
       }):<></>}
     </div>
   )

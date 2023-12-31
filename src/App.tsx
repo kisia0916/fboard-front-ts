@@ -34,7 +34,7 @@ function App() {
                       <Route path='/login' element={loadState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>} />
                       <Route path='/home' element={loginState?<Home/>:<Navigate replace to="/login"/>}/>
                       <Route path='/thread/:id' element={<ThreadPage/>}/>
-                      <Route path='/profile' element={<ProfileSeMain/>}/>
+                      <Route path='/profile/:id' element={<ProfileSeMain/>}/>
                   </Routes>
                   {loginState?<RightBar/>:<></>}
                 </BrowserRouter>:<></>}

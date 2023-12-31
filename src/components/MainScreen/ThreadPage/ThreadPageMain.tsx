@@ -36,6 +36,8 @@ function ThreadPageMain() {
   const textValueRef = useRef<any>("")
   const nowPushKey = useRef<"Shift"|"">()
   const [selectFile,setSelectFile] = useState<any>(null)
+  const [selectFileInfo,setSelectFileInfo] = useState<any>(false)
+
   const [cookies,setCookie] = useCookies()
   const [latestPost,setLatestPost] = useState<ThreadPostModule>()
   const [nowReply,setNowReply] = useState<any>({postId:"",userName:""})
@@ -53,6 +55,7 @@ function ThreadPageMain() {
       console.log(threadListScroll.current.scrollTop+threadListScroll.current.clientHeight)
       console.log(threadListScroll.current.scrollHeight)
       setDoneFirstScroll(true)
+
     }
     console.log("ふくふく")
   },[loadDone])
@@ -116,7 +119,7 @@ function ThreadPageMain() {
           changeTrueFalseBaner()
         }else{
           console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa")
-          sendMess(mess,userId,pass,threadId,setLatestPost,"",nowReply.postId)
+          sendMess(mess,userId,pass,threadId,setLatestPost,"",nowReply.postId,selectFileInfo)
           closeReplyBar()
         }
       }
@@ -141,8 +144,17 @@ function ThreadPageMain() {
     console.log("change")
     setSelectFile(e.target.files[0])
     if(e.target.files[0]){
-      console.log("動いてます")
-      changeTrueFileBaner()
+      const imgUrl = URL.createObjectURL(e.target.files[0])
+      const img = new Image()
+      img.src = imgUrl
+      img.onload = ()=>{
+        console.log(img.width)
+        console.log(img.height)
+        setSelectFileInfo({width:img.width,height:img.height})
+        console.log("動いてます")
+
+        changeTrueFileBaner()
+      }
     }
   }
   const imgUploadFun = (userId:string,mess:string,pass:string,threadId:string)=>{
@@ -150,7 +162,7 @@ function ThreadPageMain() {
     formData.append("postimg",selectFile)
     axios.post("http://localhost:5000/threadpost/data/uploadpostimg",formData).then((res)=>{
       console.log(res)
-      sendMess(mess,userId,pass,threadId,setLatestPost,res.data,nowReply.postId)
+      sendMess(mess,userId,pass,threadId,setLatestPost,res.data,nowReply.postId,selectFileInfo)
       setSelectFile(null)
       closeReplyBar()
     }).catch((e)=>{
@@ -174,6 +186,7 @@ function ThreadPageMain() {
     console.log("debug")
     setFileInfoBar(false)
     setSelectFile(null)
+    setSelectFileInfo(false)
     console.log(selectFileRef.current)
     setAriaWarpp(ariaWarpp-25)
   }
@@ -211,7 +224,7 @@ function ThreadPageMain() {
   const [nextLoad,setNextLoad] = useState<boolean>(true)
   const scrollFunction = ()=>{
     if(doneFirstScroll){
-      if(threadListScroll.current.scrollTop/*+ threadListScroll.current.clientHeight*/<10/*(threadListScroll.current.scrollHeight/10)*6*/  && !nowLoading && nextLoad){
+      if(threadListScroll.current.scrollTop/*+ threadListScroll.current.clientHeight*/===0/*(threadListScroll.current.scrollHeight/10)*6*/  && !nowLoading && nextLoad){
         setNowLoading(true)
         setRastScroll(threadListScroll.current.scrollHeight-(threadListScroll.current.scrollTop-threadListScroll.current.clientHeight))
         setPage(page+1)
@@ -267,7 +280,7 @@ function ThreadPageMain() {
       <div className='ThreadPageMessSpace' ref={threadListScroll} onScroll={scrollFunction} style={{height:"100%"}}>
           {loadDone?<></>:<LoadAni size='30px' top='30px'/>}
           {nowLoading?<LoadAni size='30px' top='30px'/>:<></>}
-          <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad} repList={postRepList} setRepList={setPostRepList} setReply={setNowReply} changeReply={pushReplyButton} replyCounterFun={replyCountUpFun} replyCounter={replyCounter}/>
+          <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad} repList={postRepList} setRepList={setPostRepList} setReply={setNowReply} changeReply={pushReplyButton} replyCounterFun={replyCountUpFun} replyCounter={replyCounter} doneFirstScroll={doneFirstScroll}/>
       </div>
       </div>
     <div className='ThreadPageSendSpace'>
