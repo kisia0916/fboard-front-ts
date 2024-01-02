@@ -25,8 +25,27 @@ function ProfileSeMain() {
   const [profileLoadDone,setProfileLoadDone] = useState<boolean>(false)
 
   const [myPostCheckLoadDone,setMyCheckPostLoadDone] = useState<boolean>(false)
-
+  const [isWriteProfileButton,setIsWriteProfileButton] = useState<boolean>(false)
+  const [followButtonText,setFollorButtonText] = useState<string>("") 
   const profileUserName:string = useParams().id as string
+  const pushFollow = ()=>{
+    console.log(cookies.pass)
+
+    if(followButtonText === "Friend Reqest"){
+      console.log(cookies.userId)
+      console.log(profileUserId)
+      axios.post("http://localhost:5000/user/data/addfriend",{
+        userId:cookies.userId,
+        otheruserId:profileUserId,
+        pass:"123456",
+        hashFlg:false,
+      }).then((res)=>{
+        console.log(res.data)
+      }).catch((error)=>{console.log(error)})
+    }else if(followButtonText === "Delete Friend"){
+
+    }
+  }
   useEffect(()=>{
     setHeaderImgWidth(profileImgRef.current.offsetWidth)
     console.log(profileUserName)
@@ -41,7 +60,19 @@ function ProfileSeMain() {
       setHeader(res.data.header)
       setProfile(res.data.profile)
       setProfileUserId(res.data.userId)
+      if(res.data.friendInfo.isFriend !== -1){
+        setFollorButtonText("Delete Friend")
+      }else if(res.data.friendInfo.isReqeston !== -1){
+        setFollorButtonText("Approval Reqest")
+      }else if(res.data.friendInfo.isSended !== -1){
+        setFollorButtonText("Requested")
+      }else{
+        setFollorButtonText("Friend Reqest")
+      }
       setProfileLoadDone(true)
+      if(cookies.name !== profileUserName){
+        setIsWriteProfileButton(true)
+      }
     }).catch(()=>{})
 
   },[])
@@ -102,9 +133,9 @@ function ProfileSeMain() {
             <div className='ProfileSeTopIconWarpp'></div>
             <div className='ProfileSeTopUserText'>
               <span className='ProfileSeTopUserName'>{userName}</span>
-              <div className='ProfileSeTopUserFollowButton'>
-                <span className='ProfileSeTopUserFollowButtonText'>Friend Reqest</span>
-              </div>
+              {profileLoadDone && isWriteProfileButton?<button className='ProfileSeTopUserFollowButton' onClick={pushFollow}>
+                <span className='ProfileSeTopUserFollowButtonText'>{followButtonText}</span>
+              </button>:<></>}
             </div>
             <img src='/photos/zbnU2dcD_400x400.jpg' alt='' className='ProfileSeTopIconImg'/>
 
