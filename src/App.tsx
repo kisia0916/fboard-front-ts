@@ -11,6 +11,8 @@ import { BrowserRouter,Navigate,Route, Router, Routes } from 'react-router-dom';
 import CheckCookieLogin from './logics/CheckCookieLogin';
 import ProfileSeMain from './components/MainScreen/Profile2/ProfileSeMain';
 import MkPostWindowMain from './components/MkPostWindow/MkPostWindowMain';
+import FriendList from './pages/FriendList';
+import JoinedThread from './pages/JoinedThread';
 export const mkPostWindowContext:any = createContext({})
 function App() {
   const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
@@ -33,6 +35,8 @@ function App() {
                       <Route path='/' element={loginState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>}/>
                       <Route path='/login' element={loadState?<Navigate replace to="/home"/>:<Login setLoginState={setLoginState}/>} />
                       <Route path='/home' element={loginState?<Home/>:<Navigate replace to="/login"/>}/>
+                      <Route path='/friendlist' element={<FriendList/>}/>
+                      <Route path='/jointhread' element={<JoinedThread/>}/>
                       <Route path='/thread/:id' element={<ThreadPage/>}/>
                       <Route path='/profile/:id' element={<ProfileSeMain/>}/>
                   </Routes>

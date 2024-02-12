@@ -9,11 +9,11 @@
     height: 50px;
     border-radius: 50px;
     margin-top: 18px;
-    margin-left: 47.5px;
+    margin-left: 26px;
     /* margin-left: 3.49%; */
 }
 .HomeScreenCreateBox{
-    width: calc(100% - 98px - 120px - 105px);
+    width: calc(100% - 98px - 120px - 80px);
     height: 52px;
     margin-top: 18px;
     margin-left: 20px;

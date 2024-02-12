@@ -126,7 +126,7 @@ function MkPostWindowThreadMain() {
             </div>
           </div>
           <button className='MkPostWindowThreadEnterButton'onClick={uploadThreadImg}>
-              {uploadLoading?<LoadMiniMain/>:<span className='MkPostWindowThreadEnterButtonText'>Create</span>}
+              {uploadLoading?<LoadMiniMain color='#edff48'/>:<span className='MkPostWindowThreadEnterButtonText'>Create</span>}
           </button>
         </div>
     </div>

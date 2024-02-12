@@ -1,0 +1,39 @@
+.friendListMain{
+    width: calc(100% - 290px - 360px);
+    height: 100vh;
+    min-width: 640px;
+    /* background-color: red; */
+    border-left: solid #3d3f4d 1px;
+    border-right: solid #3d3f4d 1px;
+}
+.friendListPageTop{
+    width: 100%;
+    height: 48px;
+    border-bottom: solid 1px #4e5363;
+
+    display: flex;
+}
+.friendListPageInfo{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: solid 1px #4e5363;
+    color: white;
+    font-size: 110%;
+    margin-top: 8px;
+}
+.friendListTopBackIcon{
+    color: white;
+    margin-top: 12px;
+    margin-left: 21px;
+}
+.firstListTitle{
+    color: white;
+    margin: auto;
+    font-size: 140%;
+}
+.friendListUser{
+    width: 100%;
+    height:calc(100vh - 48px);
+}

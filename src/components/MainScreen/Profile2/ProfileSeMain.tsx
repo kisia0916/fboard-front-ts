@@ -9,6 +9,8 @@ import { Router, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Console } from 'console';
+import LoadAni from '../../amimations/Load/LoadAni';
+import LoadMiniMain from '../../amimations/LoadMini/LoadMiniMain';
 
 function ProfileSeMain() {
   const profileImgRef = useRef<any>()
@@ -28,22 +30,53 @@ function ProfileSeMain() {
   const [isWriteProfileButton,setIsWriteProfileButton] = useState<boolean>(false)
   const [followButtonText,setFollorButtonText] = useState<string>("") 
   const profileUserName:string = useParams().id as string
+  const [friendReqLoadFlg,setFriendReqFlg] = useState<boolean>(false)
   const pushFollow = ()=>{
-    console.log(cookies.pass)
+    if (!friendReqLoadFlg){
+      console.log(cookies.pass)
 
-    if(followButtonText === "Friend Reqest"){
-      console.log(cookies.userId)
-      console.log(profileUserId)
-      axios.post("http://localhost:5000/user/data/addfriend",{
-        userId:cookies.userId,
-        otheruserId:profileUserId,
-        pass:"123456",
-        hashFlg:false,
-      }).then((res)=>{
-        console.log(res.data)
-      }).catch((error)=>{console.log(error)})
-    }else if(followButtonText === "Delete Friend"){
+      if(followButtonText === "Friend Reqest"){
+      setFriendReqFlg(true)
 
+        console.log(cookies.userId)
+        console.log(profileUserId)
+        axios.post("http://localhost:5000/user/data/addfriend",{
+          userId:cookies.userId,
+          otheruserId:profileUserId,
+          pass:cookies.pass,
+          hashFlg:false,
+        }).then((res)=>{
+          console.log(res.data)
+          if (res.data === "sendReqest"){
+            setFollorButtonText("Reqested")
+            setFriendReqFlg(false) 
+          }
+        }).catch((error)=>{console.log(error)})
+      }else if(followButtonText === "Delete Friend"){
+      setFriendReqFlg(true)
+
+        axios.post("http://localhost:5000/user/data/deletefriend",{
+          userId:cookies.userId,
+          otheruserId:profileUserId,
+          pass:cookies.pass
+        }).then((res)=>{
+          setFollorButtonText("Friend Reqest")
+          setFriendReqFlg(false)
+        })
+      }else if (followButtonText === "Approval Reqest"){
+      setFriendReqFlg(true)
+
+        axios.post("http://localhost:5000/user/data/addfriend",{
+          userId:cookies.userId,
+          otheruserId:profileUserId,
+          pass:cookies.pass
+        }).then((res)=>{
+          setFollorButtonText("Delete Friend")
+          setFriendReqFlg(false)
+        })
+      }else if(followButtonText === "Requested"){
+        
+      }
     }
   }
   useEffect(()=>{
@@ -128,73 +161,74 @@ function ProfileSeMain() {
             <span className='ProfileUserNumText'>12</span>
           </div>
         </div>
-        <div className='ProfileSeTopSpace' ref={profileImgRef}>
-            <img src='/photos/1500x500.jpg' alt='' className='ProfileSeTopHeaderImg' style={{width:"100%"}}/>
-            <div className='ProfileSeTopIconWarpp'></div>
-            <div className='ProfileSeTopUserText'>
-              <span className='ProfileSeTopUserName'>{userName}</span>
-              {profileLoadDone && isWriteProfileButton?<button className='ProfileSeTopUserFollowButton' onClick={pushFollow}>
-                <span className='ProfileSeTopUserFollowButtonText'>{followButtonText}</span>
-              </button>:<></>}
-            </div>
-            <img src='/photos/zbnU2dcD_400x400.jpg' alt='' className='ProfileSeTopIconImg'/>
+        <div style={{height:"calc(100vh - 48px)", width:"100%",position:"absolute",overflowX:"hidden",overflowY:"auto"}}>
+          <div className='ProfileSeTopSpace' ref={profileImgRef}>
+              <img src='/photos/1500x500.jpg' alt='' className='ProfileSeTopHeaderImg' style={{width:"100%"}}/>
+              <div className='ProfileSeTopIconWarpp'></div>
+              <div className='ProfileSeTopUserText'>
+                <span className='ProfileSeTopUserName'>{userName}</span>
+                {profileLoadDone && isWriteProfileButton?<button className='ProfileSeTopUserFollowButton' onClick={pushFollow}>
+                  <span className='ProfileSeTopUserFollowButtonText'>{friendReqLoadFlg?<LoadMiniMain color="white"/>:followButtonText}</span>
+                </button>:<></>}
+              </div>
+              <img src='/photos/zbnU2dcD_400x400.jpg' alt='' className='ProfileSeTopIconImg'/>
 
+          </div>
+          <div className='ProfileSeMainSpace'>
+            <div className='ProfileSeMainProfileSpace'>
+              <div className='ProfileSeMainProfileSpaceWarpp'>
+                <span className='ProfileSeMainProfileSpaceText'>{"こんにちは。開発中です"}</span>
+              </div>
+              <div className='ProfileSeMainProfileSpaceSendMessIconWarpp'>
+                <EmailIcon className='ProfileSeMainProfileSpaceSendMessIcon' style={{fontSize:"180%"}}/>
+              </div>
+            </div>
+            <div className='ProfileSeMainSelectContentBar'>
+                <div className='ProfileSeMainSelectContentBarWarpp'>
+                  <span className='ProfileSeMainSelectContentBarTitle'>All Post</span>
+                  <div className='ProfileSeMainSelectContentBarSelected'></div>
+                </div>
+                <div className='ProfileSeMainSelectContentBarWarpp'>
+                  <span className='ProfileSeMainSelectContentBarTitle'>Thread</span>
+                </div>
+                <div className='ProfileSeMainSelectContentBarWarpp'>
+                  <span className='ProfileSeMainSelectContentBarTitle'>Blog</span>
+                </div>
+                <div className='ProfileSeMainSelectContentBarWarpp'>
+                  <span className='ProfileSeMainSelectContentBarTitle'>Joined</span>
+                </div>
+            </div>
+            <div className='ProfileSeMainCons'>
+              {console.log(myPostList.length)}
+            {myPostCheckLoadDone && myPostLoadDone && profileLoadDone?myPostList.map((i:any)=>{
+              console.log(i)
+              console.log(myPostList)
+              console.log(checkPostList)
+              let checkFlg:boolean = false
+              checkPostList.forEach((item:any)=>{
+                if (item.threadId === i.theradId){
+                  checkFlg = item.flg
+                }
+              })
+              
+              return <ThreadMain threadTitle={i.title} threadId={i.theradId} joinNum={i.joinNum} userNum={30} postNum={i.postNum} createUserName={i.userName} createdDate={i.createdAt} tagList={i.tags} titleIcon={i.threadPhoto} userIcon='' isJoined={checkFlg}/>
+            }):<LoadAni size='30px' top='30px'/>}
+            {/* <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["プログラミング","卒論","開発テスト"]} titleIcon='http://localhost:5000/public/img/thread/c4c24eae-8088-4bc2-a707-bdc6fa420b83.png' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='SNSを個人で開発してみた' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["Node.js","React","プログラミング"]} titleIcon='http://localhost:3000/photos/zbnU2dcD_400x400.jpg' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='アドベントカレンダーを描いてみたい' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["卒論","プログラミング","雑談"]} titleIcon='http://localhost:5000/public/img/f9a0a103-9421-473b-8de3-1bdddb676f3a.jpg' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='自作PCにつけられるグラボを探そう' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["自作PC","GPU","雑談"]} titleIcon='http://localhost:5000/public/img/b379be33-d3d1-4c9b-afd4-4513a5d88720.jpg' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''isJoined={false}/>
+            <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
+            <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/> */}
+
+
+
+
+            </div>
+          </div>
         </div>
-        <div className='ProfileSeMainSpace'>
-          <div className='ProfileSeMainProfileSpace'>
-            <div className='ProfileSeMainProfileSpaceWarpp'>
-              <span className='ProfileSeMainProfileSpaceText'>{profile}</span>
-            </div>
-            <div className='ProfileSeMainProfileSpaceSendMessIconWarpp'>
-              <EmailIcon className='ProfileSeMainProfileSpaceSendMessIcon' style={{fontSize:"180%"}}/>
-            </div>
-          </div>
-          <div className='ProfileSeMainSelectContentBar'>
-              <div className='ProfileSeMainSelectContentBarWarpp'>
-                <span className='ProfileSeMainSelectContentBarTitle'>All Post</span>
-                <div className='ProfileSeMainSelectContentBarSelected'></div>
-              </div>
-              <div className='ProfileSeMainSelectContentBarWarpp'>
-                <span className='ProfileSeMainSelectContentBarTitle'>Thread</span>
-              </div>
-              <div className='ProfileSeMainSelectContentBarWarpp'>
-                <span className='ProfileSeMainSelectContentBarTitle'>Blog</span>
-              </div>
-              <div className='ProfileSeMainSelectContentBarWarpp'>
-                <span className='ProfileSeMainSelectContentBarTitle'>Joined</span>
-              </div>
-          </div>
-          <div className='ProfileSeMainCons'>
-            {console.log(myPostList.length)}
-          {myPostCheckLoadDone && myPostLoadDone && profileLoadDone?myPostList.map((i:any)=>{
-            console.log(i)
-            console.log(myPostList)
-            console.log(checkPostList)
-            let checkFlg:boolean = false
-            checkPostList.forEach((item:any)=>{
-              if (item.threadId === i.theradId){
-                checkFlg = item.flg
-              }
-            })
-            
-            return <ThreadMain threadTitle={i.title} threadId={i.theradId} joinNum={i.joinNum} userNum={30} postNum={i.postNum} createUserName={i.userName} createdDate={i.createdAt} tagList={i.tags} titleIcon={i.threadPhoto} userIcon='' isJoined={checkFlg}/>
-          }):<></>}
-          {/* <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["プログラミング","卒論","開発テスト"]} titleIcon='http://localhost:5000/public/img/thread/c4c24eae-8088-4bc2-a707-bdc6fa420b83.png' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='SNSを個人で開発してみた' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["Node.js","React","プログラミング"]} titleIcon='http://localhost:3000/photos/zbnU2dcD_400x400.jpg' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='アドベントカレンダーを描いてみたい' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["卒論","プログラミング","雑談"]} titleIcon='http://localhost:5000/public/img/f9a0a103-9421-473b-8de3-1bdddb676f3a.jpg' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='自作PCにつけられるグラボを探そう' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["自作PC","GPU","雑談"]} titleIcon='http://localhost:5000/public/img/b379be33-d3d1-4c9b-afd4-4513a5d88720.jpg' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon=''isJoined={false}/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
-          <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/> */}
-
-
-
-
-          </div>
-        </div>
-
         <div>
 
         </div>

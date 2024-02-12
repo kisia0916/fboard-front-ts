@@ -1,0 +1,66 @@
+.friendListUser{
+    height: 95px;
+    border-bottom: solid 1px #4e5363;
+}
+.friendUserListTop{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.friendListSelectBarLine{
+    display: flex;
+    width: 100%;
+    height: 5px;
+    background-color: #edff49;
+    margin-top: 7px;
+    border-radius: 50px;
+}
+.friendListUserIcon{
+    width: 38px;
+    height: 38px;
+    border-radius: 50px;
+    margin-top: 13px;
+    margin-left: 23px;
+}
+.friendListUserName{
+    color: white;
+    font-size: 140%;
+    margin-top: 20px;
+    margin-left: 12px;
+}
+.friendUserListMain{
+    display: flex;
+}
+.friendListMainProfile{
+    color: rgba(255, 255, 255, 0.694);
+    margin-left: 72px;
+    margin-top: 5px;
+}
+.friendUserListTopLeft{
+    display: flex;
+}
+.friendUserListTopRight{
+    width: 100px;
+    height: 26px;
+    background-color:#edff57;
+    margin-top: 18px;
+    border-radius: 50px;
+    margin-right: 23px;
+    display: flex;
+
+}
+.friendUserListTopRightTitle{
+    font-size: 80%;
+    margin: auto;
+    color: #3c414d;
+}
+.friendListUserStatus{
+    color: #ffffffa5;
+    font-size: 80%;
+    /* margin-top: 8px; */
+    margin-left: 5px;
+}
+.friendListUserInfo{
+    margin-top: 5px;
+}
