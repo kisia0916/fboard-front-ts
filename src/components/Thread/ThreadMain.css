@@ -34,7 +34,7 @@
 }
 .ThreadMainLeft{
     margin-left: 3.49%;
-    margin-left: 26px;
+    margin-left: 23px;
     
 }
 .ThreadTitleIcon{
@@ -160,7 +160,7 @@
     /* width: 100px; */
     height: 22px;
     border: solid 1px rgb(224, 255, 47);
-    margin-right: 25px;
+    margin-right: 18px;
     border-radius: 50px;
     margin-top: 20px;
     word-break: break-all !important;
