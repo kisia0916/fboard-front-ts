@@ -192,3 +192,11 @@
 .ProfileSeMainCons{
     width: 100%;
 }
+.ProfileSeMainWarpp::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+}
+.ProfileSeMainWarpp::-webkit-scrollbar-thumb {
+    background-color: #353845;
+    border-radius: 10px;
+}

@@ -161,7 +161,7 @@ function ProfileSeMain() {
             <span className='ProfileUserNumText'>12</span>
           </div>
         </div>
-        <div style={{height:"calc(100vh - 48px)", width:"100%",position:"absolute",overflowX:"hidden",overflowY:"auto"}}>
+        <div className='ProfileSeMainWarpp' style={{height:"calc(100vh - 48px)", width:"100%",position:"absolute",overflowX:"hidden",overflowY:"scroll"}}>
           <div className='ProfileSeTopSpace' ref={profileImgRef}>
               <img src='/photos/1500x500.jpg' alt='' className='ProfileSeTopHeaderImg' style={{width:"100%"}}/>
               <div className='ProfileSeTopIconWarpp'></div>
