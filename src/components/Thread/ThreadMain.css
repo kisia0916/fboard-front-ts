@@ -28,7 +28,7 @@
     width: calc(100% - 95px);
 }
 .ThreadRightTop{
-    margin-left: 23px;
+    margin-left: 21px;
     /* display: flex; */
     /* justify-content: space-between; */
 }
@@ -38,8 +38,8 @@
     
 }
 .ThreadTitleIcon{
-    width:70px;
-    height: 70px;
+    width:65px;
+    height: 65px;
     margin-top: 14px;
     /* margin-bottom: 19px; */
     border-radius: 10px;
@@ -50,7 +50,7 @@
     display: flex;
     color: white;
     /* font-size: 155%; */
-    font-size: 140%;
+    font-size: 135%;
 
     margin-top:11px;
     /* margin-left: 24px; */
@@ -86,7 +86,7 @@
     /* width: 66px; */
     margin-top: 12px;
     background-color: #494e62;
-    margin-left: 24px;
+    margin-left: 20px;
     border-radius: 20px;
     display: flex;
     border: none;
