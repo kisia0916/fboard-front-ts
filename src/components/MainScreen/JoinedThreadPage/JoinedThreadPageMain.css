@@ -20,4 +20,14 @@
 .JoinThreadPageScreen{
     width: 100%;
     height: calc(100vh - 48px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.JoinThreadPageScreen::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+}
+.JoinThreadPageScreen::-webkit-scrollbar-thumb {
+    background-color: #353845;
+    border-radius: 10px;
 }

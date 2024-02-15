@@ -25,12 +25,37 @@ function ProfileSeMain() {
   const [checkPostList,setCheckPostList] =  useState<any>([])
   const [myPostLoadDone,setMyPostLoadDone] = useState<boolean>(false)
   const [profileLoadDone,setProfileLoadDone] = useState<boolean>(false)
-
   const [myPostCheckLoadDone,setMyCheckPostLoadDone] = useState<boolean>(false)
   const [isWriteProfileButton,setIsWriteProfileButton] = useState<boolean>(false)
   const [followButtonText,setFollorButtonText] = useState<string>("") 
   const profileUserName:string = useParams().id as string
   const [friendReqLoadFlg,setFriendReqFlg] = useState<boolean>(false)
+
+  const scrollRef = useRef(null)
+  const [loadStartNextPage,setLoadStartNextPage] = useState<boolean>(false) 
+  const [nowPage,setNowPage] = useState<number>(0)
+  const [allLoadDone,setAllLoadDone] = useState<boolean>(false)
+  const scrollFun = ()=>{
+    const sc:any = scrollRef.current
+    if((sc.scrollTop/(sc.scrollHeight - sc.clientHeight))*100>90 && !loadStartNextPage && !allLoadDone){
+      console.log("loading")
+        setLoadStartNextPage(true)
+        axios.post("http://localhost:5000/user/profile/getmythread",{
+            userId:cookies.userId,
+            page:nowPage+1
+        }).then((res)=>{
+            if (res.data.length === 0){
+                setAllLoadDone(true)
+            }
+            setMyPostList([...myPostList,...res.data])
+            setNowPage(nowPage+1)
+            setLoadStartNextPage(false)
+        }).catch((error:any)=>{
+            console.log(error)
+        })
+      }
+}
+
   const pushFollow = ()=>{
     if (!friendReqLoadFlg){
       console.log(cookies.pass)
@@ -161,7 +186,7 @@ function ProfileSeMain() {
             <span className='ProfileUserNumText'>12</span>
           </div>
         </div>
-        <div className='ProfileSeMainWarpp' style={{height:"calc(100vh - 48px)", width:"100%",position:"absolute",overflowX:"hidden",overflowY:"scroll"}}>
+        <div className='ProfileSeMainWarpp'  ref={scrollRef} onScroll={scrollFun} style={{height:"calc(100vh - 48px)", width:"100%",position:"absolute",overflowX:"hidden",overflowY:"scroll"}}>
           <div className='ProfileSeTopSpace' ref={profileImgRef}>
               <img src='/photos/1500x500.jpg' alt='' className='ProfileSeTopHeaderImg' style={{width:"100%"}}/>
               <div className='ProfileSeTopIconWarpp'></div>
@@ -222,9 +247,7 @@ function ProfileSeMain() {
             <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
             <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/>
             <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={[]} titleIcon='' userIcon='' isJoined={false}/> */}
-
-
-
+            {loadStartNextPage?<LoadAni size='30px' top='10px'/>:<></>}
 
             </div>
           </div>

@@ -13,6 +13,7 @@ import ProfileSeMain from './components/MainScreen/Profile2/ProfileSeMain';
 import MkPostWindowMain from './components/MkPostWindow/MkPostWindowMain';
 import FriendList from './pages/FriendList';
 import JoinedThread from './pages/JoinedThread';
+import SearchPage from './pages/SearchPage';
 export const mkPostWindowContext:any = createContext({})
 function App() {
   const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
@@ -39,6 +40,7 @@ function App() {
                       <Route path='/jointhread' element={<JoinedThread/>}/>
                       <Route path='/thread/:id' element={<ThreadPage/>}/>
                       <Route path='/profile/:id' element={<ProfileSeMain/>}/>
+                      <Route path='/search/:word' element={<SearchPage/>}/>
                   </Routes>
                   {loginState?<RightBar/>:<></>}
                 </BrowserRouter>:<></>}

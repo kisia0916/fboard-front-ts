@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import "./FriendListPageMain.css"
 import FriendUserMain from './FriendUser/FriendUserMain';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import LoadAni from '../../amimations/Load/LoadAni';
 
 function FriendListPageMain() {
+    const [cookies,setCookie] = useCookies()
+    const [friendLoadDone,setFriendLoadDone] = useState<boolean>(false)
+    const [friendList,setFriendList] = useState<any>()
+    useEffect(()=>{
+    axios.post("http://localhost:5000/user/profile/getfriend",{
+        userId:cookies.userId
+    }).then((res)=>{
+        setFriendList(res.data)
+        setFriendLoadDone(true) 
+    }).catch(()=>{
+
+    })
+  },[])
   return (
     <div className='friendListMain'>
         <div className='friendListPageTop'>
@@ -22,12 +38,10 @@ function FriendListPageMain() {
                 <span className='friendListSelectBarTitle'>All(13)</span>
             </div>
         </div>
-        <div className='friendListUser'>
-            <FriendUserMain userName='fumi0916' profile='このSNSの開発者です' status='Homeを閲覧中'/>
-            <FriendUserMain userName='ikento' profile='ikentoです。valorantがうまいです' status='自作PC創る会を閲覧中'/>
-            <FriendUserMain userName='chsato' profile='かわいいです。リコリコで働いてます' status='Blogを執筆中'/>
-            <FriendUserMain userName='takina' profile='DAに戻るためにリコリコで働いています。頑張ります' status='掲示板開発を閲覧中'/>
-
+        <div className='friendListUserWarpp'>
+            {friendLoadDone?friendList.map((i:any)=>{
+            return <FriendUserMain userName={i.userName} profile={i.profile} status='Homeを閲覧中'/>
+            }):<LoadAni size='30px' top='10px'/>}
         </div>
     </div>
   )
