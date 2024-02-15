@@ -13,7 +13,7 @@
     /* margin-left: 3.49%; */
 }
 .HomeScreenCreateBox{
-    width: calc(100% - 98px - 120px - 76px);
+    width: calc(100% - 98px - 120px - 71px);
     height: 52px;
     margin-top: 18px;
     margin-left: 20px;
@@ -22,7 +22,7 @@
     display: flex;
 }
 .HomeScreenCreateSendButton{
-    width: 165px;
+    width: 160px;
     height: 50px;
     background-color: #edff48;
     margin-top: 19px;
