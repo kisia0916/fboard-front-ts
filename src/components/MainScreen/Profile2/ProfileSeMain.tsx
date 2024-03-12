@@ -6,11 +6,12 @@ import EmailIcon from '@mui/icons-material/Email';
 import ThreadUserPostMain from '../ThreadPage/ThreadUserPost/ThreadUserPostMain';
 import ThreadMain from '../../Thread/ThreadMain';
 import { Router, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
-import { Console } from 'console';
+import { Console, timeStamp } from 'console';
 import LoadAni from '../../amimations/Load/LoadAni';
 import LoadMiniMain from '../../amimations/LoadMini/LoadMiniMain';
+import { getThreadInterface } from '../../../interface/getThreadInterface';
 
 function ProfileSeMain() {
   const profileImgRef = useRef<any>()
@@ -33,22 +34,22 @@ function ProfileSeMain() {
 
   const scrollRef = useRef(null)
   const [loadStartNextPage,setLoadStartNextPage] = useState<boolean>(false) 
-  const [nowPage,setNowPage] = useState<number>(0)
+  const [nowTimeStamp,setNowTimeStamp] = useState<string>("")
   const [allLoadDone,setAllLoadDone] = useState<boolean>(false)
   const scrollFun = ()=>{
     const sc:any = scrollRef.current
     if((sc.scrollTop/(sc.scrollHeight - sc.clientHeight))*100>90 && !loadStartNextPage && !allLoadDone){
-      console.log("loading")
         setLoadStartNextPage(true)
         axios.post("http://localhost:5000/user/profile/getmythread",{
             userId:cookies.userId,
-            page:nowPage+1
-        }).then((res)=>{
+            timeStamp:nowTimeStamp
+        }).then((res:AxiosResponse<getThreadInterface[]>)=>{
             if (res.data.length === 0){
                 setAllLoadDone(true)
+                setLoadStartNextPage(false)
             }
             setMyPostList([...myPostList,...res.data])
-            setNowPage(nowPage+1)
+            setNowTimeStamp(res.data[res.data.length-1].createdAt)
             setLoadStartNextPage(false)
         }).catch((error:any)=>{
             console.log(error)
@@ -138,11 +139,12 @@ function ProfileSeMain() {
     if(profileLoadDone){
       axios.post("http://localhost:5000/user/profile/getmythread",{
         userId:profileUserId,
-        page:0
-      }).then((res:any)=>{
+        timeStamp:""
+      }).then((res:AxiosResponse<getThreadInterface[]>)=>{
         console.log(res.data)
         setMyPostList(res.data)
         setMyPostLoadDone(true)
+        setNowTimeStamp(res.data[res.data.length-1].createdAt)
       }).catch((error)=>{console.log(error)})
     }
   },[profileLoadDone])

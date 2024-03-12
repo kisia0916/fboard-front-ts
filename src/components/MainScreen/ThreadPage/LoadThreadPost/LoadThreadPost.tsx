@@ -19,7 +19,7 @@ interface threadPostType{
 }
 let replyCounter2:number = 0
 
-function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,page:number,setPage:React.Dispatch<React.SetStateAction<number>>,setScrollList:React.Dispatch<React.SetStateAction<any>>,setnextLoad:React.Dispatch<React.SetStateAction<any>>,nextLoad:boolean,repList:any,setRepList:React.Dispatch<React.SetStateAction<any>>,setReply:React.Dispatch<React.SetStateAction<any>>,changeReply:any,replyCounterFun:any,replyCounter:number,doneFirstScroll:boolean}) {
+function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,timeStamp:string,setScrollList:React.Dispatch<React.SetStateAction<any>>,setnextLoad:React.Dispatch<React.SetStateAction<any>>,nextLoad:boolean,repList:any,setRepList:React.Dispatch<React.SetStateAction<any>>,setReply:React.Dispatch<React.SetStateAction<any>>,changeReply:any,replyCounterFun:any,replyCounter:number,doneFirstScroll:boolean}) {
   console.log("再描画されました")
   const thradId = useParams().id
   const [postList,setPostList] = useState<any>(props.scrollList)
@@ -35,14 +35,13 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
     console.log("sino3")
     if(props.nextLoad){
       axios.post("http://localhost:5000/threadpost/data/getthreadpost",{
-        page:props.page,
+        timeStamp:props.timeStamp,
         threadId:thradId,
         threadPrivateToken:"0a5de211-065e-43d0-b1ea-10ec0f3f7f17"
       }).then((res:any)=>{
         replyCounter2 = 0
         getPostCounterRef.current = res.data.length
         console.log(res.data)
-        console.log(props.page)
 
         if(res.data.length>0){
             if(res.data[res.data.length-1].isFirst){
@@ -66,7 +65,7 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
         setPostLoadDone(true)
       })
     }
-  },[props.page])
+  },[props.timeStamp])
   console.log(getPostCounterRef.current)
   useEffect(()=>{
     console.log(postCounter)

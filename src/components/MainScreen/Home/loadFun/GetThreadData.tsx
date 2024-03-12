@@ -27,7 +27,7 @@ interface joinCheckFlg{
   flg:boolean
 }
 function GetThreadData(props:{threadList:getThreadInterface[]/*pageNum:number,loadDone:any,setLoadStart:any*/,checkJoinedList:any}) {
-  const [threadList,setThreadList] = useState<getThreadInterface[]>([])
+  // const [threadList,setThreadList] = useState<getThreadInterface[]>([])
   // useEffect(()=>{
   //   axios.post("http://localhost:5000/thread/data/getthreadtimeline",{page:0}).then((res:AxiosResponse<getThreadInterface[]>)=>{
   //       const getList:getThreadInterface[] = res.data.map((i)=>{
@@ -40,11 +40,12 @@ function GetThreadData(props:{threadList:getThreadInterface[]/*pageNum:number,lo
   // },[])
   console.log(props.checkJoinedList)
   console.log(props.threadList)
+  const threadList = props.threadList.slice(props.threadList.length-15,props.threadList.length)
   return (
     <div>
       {
         props.threadList.map((i,index)=>{
-          
+          let testtirtle:string = ""
           const threadFlg:number = props.checkJoinedList.findIndex((item:any)=>item.threadId === i.theradId)
           console.log(props.checkJoinedList[threadFlg])
           console.log(threadFlg)

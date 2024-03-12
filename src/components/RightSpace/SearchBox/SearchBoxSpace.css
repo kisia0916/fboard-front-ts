@@ -18,3 +18,23 @@
     margin-left: 10px;
     color: #edff4987;
 }
+.searchBoxInputBox{
+    width: 83%;
+    height: 90%;
+    border: none;
+    outline: none;
+    margin: auto;
+    color: white;
+    background-color: #35384500;
+    font-weight: bold;
+    font-family: 'M PLUS Rounded 1c', sans-serif,'Nunito', sans-serif,'M PLUS Rounded 1c';
+    font-size: 130%;
+}
+.searchBoxInputBox::placeholder{
+    color: #edff498a;
+}
+.searchBoxFormMain{
+    display: flex;
+
+    width: 100%;
+}

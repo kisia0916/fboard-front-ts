@@ -57,7 +57,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
       setJoinedColor("#edff49")
       setJoinedBorderColor("#edff49")
     }
-  },[])
+  },[props.isJoined])
   return (
     <Link to={`/thread/${props.threadId}`} style={{ textDecoration: "none" }}>
     <div className='ThreadMain' style={{borderRadius:radStyle}}>

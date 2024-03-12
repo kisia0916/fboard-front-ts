@@ -57,7 +57,6 @@ function ThreadPageMain() {
       setDoneFirstScroll(true)
 
     }
-    console.log("ふくふく")
   },[loadDone])
   const pushEnter = (e:any)=>{
     console.log(nowPushKey)
@@ -216,7 +215,7 @@ function ThreadPageMain() {
       changeTrueReplyBaner()
     }
   }
-  const [page,setPage] = useState<number>(0)
+  const [rastPostTimeStamp,setRastPostTimeStamp] = useState<string>("")
   const [postList,setPostList] = useState<any>([])
   const [postRepList,setPostRepList] = useState<any>([])
   const [nowLoading,setNowLoading] = useState<boolean>(false)
@@ -227,8 +226,8 @@ function ThreadPageMain() {
       if(threadListScroll.current.scrollTop/*+ threadListScroll.current.clientHeight*/===0/*(threadListScroll.current.scrollHeight/10)*6*/  && !nowLoading && nextLoad){
         setNowLoading(true)
         setRastScroll(threadListScroll.current.scrollHeight-(threadListScroll.current.scrollTop-threadListScroll.current.clientHeight))
-        setPage(page+1)
-        
+        setRastPostTimeStamp(postList[postList.length-1].createdAt)
+        console.log(postList)
       }
     }
   }
@@ -280,7 +279,7 @@ function ThreadPageMain() {
       <div className='ThreadPageMessSpace' ref={threadListScroll} onScroll={scrollFunction} style={{height:"100%"}}>
           {loadDone?<></>:<LoadAni size='30px' top='30px'/>}
           {nowLoading?<LoadAni size='30px' top='30px'/>:<></>}
-          <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} page={page} setPage={setPage} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad} repList={postRepList} setRepList={setPostRepList} setReply={setNowReply} changeReply={pushReplyButton} replyCounterFun={replyCountUpFun} replyCounter={replyCounter} doneFirstScroll={doneFirstScroll}/>
+          <LoadThreadPost loadDone={setLoadDone} loadDoneData ={loadDone} timeStamp={rastPostTimeStamp} scrollList={postList} setScrollList={setPostList} nextLoad={nextLoad} setnextLoad={setNextLoad} repList={postRepList} setRepList={setPostRepList} setReply={setNowReply} changeReply={pushReplyButton} replyCounterFun={replyCountUpFun} replyCounter={replyCounter} doneFirstScroll={doneFirstScroll}/>
       </div>
       </div>
     <div className='ThreadPageSendSpace'>

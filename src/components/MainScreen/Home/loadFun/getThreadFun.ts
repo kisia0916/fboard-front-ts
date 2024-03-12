@@ -19,20 +19,21 @@ interface getThreadInterface{
     joinNum:number
   }
 const maxGetThread:number = 15
-export const getThreadList = (page:number,nowData:any,updateFun:any,setThreadDone:any,setNextPageDone?:any,setLoadStart?:any,setThreadPage?:any,setRastFlg?:any)=>{
-    axios.post("http://localhost:5000/thread/data/getthreadtimeline",{page:page}).then((res:AxiosResponse<getThreadInterface[]>)=>{
+export const getThreadList = (timeStamp:string,nowData:any,updateFun:any,setThreadDone:any,setNextTimeStampDone?:any,setLoadStart?:any,setThreadTimeStamp?:any,setRastFlg?:any)=>{
+    axios.post("http://localhost:5000/thread/data/getthreadtimeline",{timeStamp:timeStamp}).then((res:AxiosResponse<getThreadInterface[]>)=>{
         const getList:getThreadInterface[] = res.data.map((i)=>{
           return i
         })
         updateFun(nowData.concat(getList))
         setThreadDone(true)
-        if(setNextPageDone){
-            setNextPageDone(false)
+        if(setNextTimeStampDone){
+            setNextTimeStampDone(false)
         }
         if(setLoadStart){
             setLoadStart(false)
         }
-        setThreadPage(page+1)
+        console.log(res.data)
+        setThreadTimeStamp(res.data[res.data.length-1].createdAt)
         console.log(nowData.concat(getList))
         if(res.data.length<15){
             setRastFlg(true)
@@ -52,6 +53,7 @@ export const checkJoined = (threadList:any[],userId:string,setJoinDone:any,setCh
         console.log(userId)
         console.log(threadIdList)
         setCheckJoinedList(res.data)
+        console.log(res.data)
         setJoinDone(true)
     }).catch((error)=>{})
 }
