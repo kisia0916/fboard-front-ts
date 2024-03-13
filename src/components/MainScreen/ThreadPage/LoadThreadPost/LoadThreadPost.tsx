@@ -58,7 +58,9 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
           }
         })
         setPostList([...res.data.reverse(),...postList])
-        props.setScrollList([...res.data.reverse(),...postList])
+        // props.setScrollList([...res.data.reverse(),...postList])
+        // setPostList([...postList,...res.data.reverse()])
+        props.setScrollList([...postList,...res.data.reverse()])
         if(replyCounter2 === 0){
           props.loadDone(true)
         }
