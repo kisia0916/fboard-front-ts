@@ -9,6 +9,7 @@ import MkPostWindowMain from '../../MkPostWindow/MkPostWindowMain';
 import InfiniteScroll from 'react-infinite-scroller';
 import { checkJoined, getThreadList } from './loadFun/getThreadFun';
 import { useCookies } from 'react-cookie';
+import { socket } from '../../../App';
 
 const getThreadNum:number = 15
 
@@ -21,8 +22,7 @@ function HomeScreen() {
   const [rastFlg,setRastFlg] = useState<boolean>(false)
   const [joinLoadDone,setJoinLoadDone] = useState<boolean>(false)
   const [checkJoinedList,setCheckJoinedList] = useState<any>([])
-                                          const [cookies,setCookie] = useCookies() 
-
+  const [cookies,setCookie] = useCookies() 
   const scrollRef = useRef(null) 
   const scrollFun = ()=>{
     const sc:any = scrollRef.current
@@ -38,7 +38,7 @@ function HomeScreen() {
   useEffect(()=>{
 
     getThreadList("",threadList,setThreadList,setThreadDone,false,false,setThreadTimeStamp)
-
+    socket.emit("change_status",{userId:cookies.userId,status:"Homeを閲覧中"})
   },[])
   useEffect(()=>{
     if(loadThreadDone && threadList.length > 0 ){

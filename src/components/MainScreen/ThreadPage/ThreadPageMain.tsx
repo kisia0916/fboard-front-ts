@@ -228,7 +228,6 @@ function ThreadPageMain() {
         setRastScroll(threadListScroll.current.scrollHeight-(threadListScroll.current.scrollTop-threadListScroll.current.clientHeight))
         setRastPostTimeStamp(postList[postList.length-1].createdAt)
         console.log(postList)
-        alert(`${postList[postList.length-1].createdAt},${postList[0].createdAt}`)
         console.log(postList)
       }
     }

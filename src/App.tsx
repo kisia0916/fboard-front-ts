@@ -14,12 +14,25 @@ import MkPostWindowMain from './components/MkPostWindow/MkPostWindowMain';
 import FriendList from './pages/FriendList';
 import JoinedThread from './pages/JoinedThread';
 import SearchPage from './pages/SearchPage';
+import io from "socket.io-client";
+import { useCookies } from 'react-cookie';
+import { analyzeStatus } from './socket/analyzeStatus';
 export const mkPostWindowContext:any = createContext({})
+export const socket = io("localhost:5000")
 function App() {
   const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
   const [loadState,setLoadState] = useState<boolean>(false)//ここ本当はfalse
   const [mkPostWindowState,setMkPostWindowState] = useState<string>("")
   const [mkPostTitle,setMkPostTitle] = useState("")
+  const [cookies,setCookie] = useCookies()
+  const [firstSocketFlg,setFirstSocketFlg] = useState<boolean>(false)
+  useEffect(()=>{
+    if (loginState){
+      const status = analyzeStatus(window)
+      socket.emit("user_connection",{name:cookies.name,icon:cookies.icon, status:status,userId:cookies.userId})
+    }
+  },[loginState])
+  socket.on("user_connection_res",(data)=>{setFirstSocketFlg(true)})
   return (
     <>    <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
       <mkPostWindowContext.Provider value={{mkPostWindowState,setMkPostWindowState,mkPostTitle,setMkPostTitle}}>
@@ -42,7 +55,7 @@ function App() {
                       <Route path='/profile/:id' element={<ProfileSeMain/>}/>
                       <Route path='/search/:word' element={<SearchPage/>}/>
                   </Routes>
-                  {loginState?<RightBar/>:<></>}
+                  {loginState && firstSocketFlg?<RightBar/>:<></>}
                 </BrowserRouter>:<></>}
               {/* <RightBar/> */}
           </div>

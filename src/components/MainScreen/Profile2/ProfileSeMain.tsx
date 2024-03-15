@@ -12,6 +12,7 @@ import { Console, timeStamp } from 'console';
 import LoadAni from '../../amimations/Load/LoadAni';
 import LoadMiniMain from '../../amimations/LoadMini/LoadMiniMain';
 import { getThreadInterface } from '../../../interface/getThreadInterface';
+import { socket } from '../../../App';
 
 function ProfileSeMain() {
   const profileImgRef = useRef<any>()
@@ -109,6 +110,7 @@ function ProfileSeMain() {
     setHeaderImgWidth(profileImgRef.current.offsetWidth)
     console.log(profileUserName)
     console.log(cookies.id)
+    socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
     axios.post("http://localhost:5000/user/profile/getprofiledata",{
       userName:profileUserName,
       myUserId:cookies.userId
