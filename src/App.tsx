@@ -18,6 +18,7 @@ import io from "socket.io-client";
 import { useCookies } from 'react-cookie';
 import { analyzeStatus } from './socket/analyzeStatus';
 export const mkPostWindowContext:any = createContext({})
+export const nowJoinPageSetFn:any = createContext(()=>{})
 export const socket = io("localhost:5000")
 function App() {
   const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
@@ -26,16 +27,22 @@ function App() {
   const [mkPostTitle,setMkPostTitle] = useState("")
   const [cookies,setCookie] = useCookies()
   const [firstSocketFlg,setFirstSocketFlg] = useState<boolean>(false)
+  const [nowJoinPageId,setNowJoinPageId] = useState<string>("")
   useEffect(()=>{
     if (loginState){
       const status = analyzeStatus(window)
       socket.emit("user_connection",{name:cookies.name,icon:cookies.icon, status:status,userId:cookies.userId})
     }
   },[loginState])
+  useEffect(()=>{
+    alert("je;;p")
+  },[nowJoinPageId])
   socket.on("user_connection_res",(data)=>{setFirstSocketFlg(true)})
   return (
-    <>    <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
+    <>    
+    <CheckCookieLogin setStateFun={setLoginState} setLoadStateFun={setLoadState}/>
       <mkPostWindowContext.Provider value={{mkPostWindowState,setMkPostWindowState,mkPostTitle,setMkPostTitle}}>
+        <nowJoinPageSetFn.Provider value={setNowJoinPageId}>
         <MkPostWindowMain mkstate={mkPostWindowState}/>
         <div className="App">
 
@@ -61,6 +68,7 @@ function App() {
           </div>
        <div/>
        </div>
+       </nowJoinPageSetFn.Provider>
        </mkPostWindowContext.Provider>
        </>
 

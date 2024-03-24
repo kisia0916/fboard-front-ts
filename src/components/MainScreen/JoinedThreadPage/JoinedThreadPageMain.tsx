@@ -6,6 +6,7 @@ import axios, { AxiosResponse } from "axios";
 import { useCookies } from "react-cookie";
 import LoadAni from "../../amimations/Load/LoadAni";
 import { getThreadInterface } from "../../../interface/getThreadInterface";
+import { socket } from "../../../App";
 
 function JoinedThreadPageMain(){
     const [cookies,setCookie] = useCookies()
@@ -37,6 +38,7 @@ function JoinedThreadPageMain(){
           }
     }
     useEffect(()=>{
+        socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
         axios.post("http://localhost:5000/thread/data/getjointhread",{
             userId:cookies.userId,
             pass:cookies.pass.toString(),

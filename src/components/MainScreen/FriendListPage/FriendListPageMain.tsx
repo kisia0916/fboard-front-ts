@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import "./FriendListPageMain.css"
 import FriendUserMain from './FriendUser/FriendUserMain';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import LoadAni from '../../amimations/Load/LoadAni';
+import { nowJoinPageSetFn, socket } from '../../../App';
 
 function FriendListPageMain() {
     const [cookies,setCookie] = useCookies()
     const [friendLoadDone,setFriendLoadDone] = useState<boolean>(false)
     const [friendList,setFriendList] = useState<any>()
+    const setNowPageId:any = useContext(nowJoinPageSetFn)
     useEffect(()=>{
+    socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
     axios.post("http://localhost:5000/user/profile/getfriend",{
         userId:cookies.userId
     }).then((res)=>{

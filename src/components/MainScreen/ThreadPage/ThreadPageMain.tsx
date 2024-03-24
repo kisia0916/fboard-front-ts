@@ -15,6 +15,7 @@ import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import RepryBar from './RepryPost/RepryBar/RepryBar';
+import { socket } from '../../../App';
 function ThreadPageMain() {
   console.log("再描画されました２")
   interface ThreadPostModule{
@@ -45,6 +46,17 @@ function ThreadPageMain() {
   const maxHight:number = 150
   const MainthreadId = useParams().id
   const [doneFirstScroll,setDoneFirstScroll] = useState<boolean>(false)
+  const [threadTitle,setThreadTitle] = useState<string>("")
+  useEffect(()=>{
+    socket.emit("join_thread_room",{threadId:MainthreadId})
+    axios.post("http://localhost:5000/thread/data/getthreadinfo",{
+      threadId:MainthreadId?.toString()
+    }).then((res)=>{
+      console.log(res)
+      setThreadTitle(res.data.title)
+      socket.emit("change_status",{userId:cookies.userId,status:`${res.data.title}を閲覧中`})
+    }).catch((e)=>{})
+  },[])
   useEffect(()=>{
     const scrollContainer = threadListScroll.current;
     console.log(threadListScroll.current.scrollHeight)
@@ -117,7 +129,6 @@ function ThreadPageMain() {
           imgUploadFun(userId,mess,pass,threadId)
           changeTrueFalseBaner()
         }else{
-          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa")
           sendMess(mess,userId,pass,threadId,setLatestPost,"",nowReply.postId,selectFileInfo)
           closeReplyBar()
         }
@@ -258,16 +269,18 @@ function ThreadPageMain() {
     <div className='MainScreen'>
     <div className='MainScreenTop'>
       <div className='MainScreenTopWarpp'>
-        <div className='MainScreenTopTexts'>
+        <div className='MainScreenTopThreadPageTexts'>
           <ArrowBackIosIcon className='ThreadPageMainBack' style={{fontSize:"145%"}}/>
-          <span className='ThreadPageMainTitle'>fboardUIテスト</span>
+          <div className='ThreadPageMainTitleWarpp'>
+            <span className='ThreadPageMainTitle'>{threadTitle}</span>  
+          </div>
         </div>
-        <div style={{display:"flex"}}>
+        {/* <div style={{display:"flex"}}>
           <div style={{display:"flex"}}>
             <ThreadTopTagMain/>
           </div>
           <div style={{width:"12px"}}></div>
-          </div>
+          </div> */}
         </div>
         <div className='MainScreenTopLeft'>
             <CallIcon className='ThreadPageTopRightCallIcon'/>
