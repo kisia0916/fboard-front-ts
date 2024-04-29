@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import LoadMiniMain from '../amimations/LoadMini/LoadMiniMain';
 import LoadMiniMini from '../amimations/LoadMiniMini/LoadMiniMini';
+import { socket } from '../../App';
 function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,threadTitle:string,joinNum:number,userNum:number,postNum:number,createUserName:string,createdDate:string,tagList:string[],titleIcon:string,userIcon:string,isJoined:any}) {
   const [cookies,setCookie] = useCookies()
   const [canPushJoinButton,setCanPushJoinButton] = useState<boolean>(true)
@@ -28,7 +29,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
     fontTop = "17px"
   }
   const [joinedColor,setJoinedColor] = useState<string>("white")
-  const [joinNum,setJoinNum] = useState(props.joinNum)
+  // const [joinNum,setJoinNum] = useState(props.joinNum)
   const [joinedBorderColor,setJoinedBorderColor] = useState<string>("rgba(0,0,0,0)")
 
   const pusjJoin = (e:any)=>{
@@ -42,11 +43,12 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
         hashFlg:false
       }).then((res)=>{
         if(res.data === "join"){
+          socket.emit("send_join",{threadId:props.threadId,userId:cookies.userId})
           setJoinedBorderColor("#edff49")
-          setJoinNum((joinNum)=>joinNum+1)
+
         }else if(res.data === "delete"){
+          socket.emit("delete_join",{threadId:props.threadId})
           setJoinedBorderColor("rgba(0,0,0,0)")
-          setJoinNum((joinNum)=>joinNum-1) 
         }
         setCanPushJoinButton(true)
       })
@@ -85,7 +87,7 @@ function ThreadMain(props:{topFlg?:boolean,profileFlg?:boolean,threadId:string,t
           <button className='ThreadMainLike' style={{border:`solid 1px ${joinedBorderColor}`}} onClick={pusjJoin}>
               {canPushJoinButton?<>
                 <PersonAddIcon className='ThreadMainLikeIcon' style={{fontSize:"145%"}}/>
-              <span className='ThreadMainLikeNum' >{joinNum}</span></>:<LoadMiniMini/>}
+              <span className='ThreadMainLikeNum' >{props.joinNum}</span></>:<LoadMiniMini/>}
           </button>
           <div className='ThreadMainMess'>
               <ChatBubbleIcon className='ThreadMainMessIcon' style={{fontSize:"140%"}}/>

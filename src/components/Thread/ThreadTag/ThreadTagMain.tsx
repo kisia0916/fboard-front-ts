@@ -4,7 +4,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import { Link } from 'react-router-dom';
 function ThreadTagMain(props:{title:string}) {
   return (
-    <Link to="/profile">
+    <Link to={`/search/${props.title}`}>
       <div className='ThreadTagMain'>
           <TagIcon style={{fontSize:"110%"}} className='ThreadMainTagIcon'/>
           <span className='ThreadMainTagText'>{props.title}</span>

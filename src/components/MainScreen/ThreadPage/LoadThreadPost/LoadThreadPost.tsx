@@ -2,6 +2,7 @@ import React, { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import ThreadUserPostMain from '../ThreadUserPost/ThreadUserPostMain';
+import { socket } from '../../../../App';
 
 interface threadPostType{
   createdAt: String;
@@ -30,10 +31,19 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
   const [loadReplyCounter,setLoadReplyCounter] = useState<number>(0)
   const [replyCountDone,setReplyCountDone] = useState<boolean>(false)
   const [postLoadDone,setPostLoadDone] = useState<boolean>(false)
-
+  useEffect(()=>{
+    socket.on("get_new_thread_post",(data:{postData:any})=>{
+      console.log(data.postData)
+      console.log(props.scrollList)
+      console.log("sino4")
+      setPostList((postList2: any)=>[...postList2,data.postData])
+      // props.setScrollList([...props.scrollList,data.postData].reverse())
+    })
+  },[])
   useEffect(()=>{
     console.log("sino3")
     if(props.nextLoad){
+
       axios.post("http://localhost:5000/threadpost/data/getthreadpost",{
         timeStamp:props.timeStamp,
         threadId:thradId,
@@ -76,6 +86,7 @@ function LoadThreadPost(props:{loadDone:any,loadDoneData:boolean,scrollList:any,
   useEffect(()=>{
     if(!props.loadDoneData && props.replyCounter === replyCounter2 && postLoadDone){
       console.log("スクロールしました")
+
       props.loadDone(true)
     }
     console.log(props.replyCounter)

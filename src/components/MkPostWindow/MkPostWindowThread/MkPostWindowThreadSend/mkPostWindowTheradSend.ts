@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useContext } from "react"
-import { mkPostWindowContext } from "../../../../App"
+import { mkPostWindowContext, socket } from "../../../../App"
 
 export const mkPostWindowThreadSend = (userId:string,title:string,pass:string,state:string,firstPost:string,tags:string[],isImgFlg:boolean,threadPhoto:string,loadFlg:any,windowFun:any)=>{
     let threadPhotoMain:string = threadPhoto
@@ -15,7 +15,7 @@ export const mkPostWindowThreadSend = (userId:string,title:string,pass:string,st
         tags:tags,
         threadPhoto:threadPhotoMain
     }).then((res)=>{
-        console.log("done")
+        socket.emit("create_new_thread",{threadData:res})
         loadFlg(false)
         windowFun("")
     }).catch((error)=>{

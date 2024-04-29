@@ -17,9 +17,16 @@ import SearchPage from './pages/SearchPage';
 import io from "socket.io-client";
 import { useCookies } from 'react-cookie';
 import { analyzeStatus } from './socket/analyzeStatus';
+import MoveProfile from './pages/MoveProfile';
 export const mkPostWindowContext:any = createContext({})
 export const nowJoinPageSetFn:any = createContext(()=>{})
 export const socket = io("localhost:5000")
+
+interface pageStateType {
+  page:string,
+  value:string
+}
+
 function App() {
   const [loginState,setLoginState] = useState<boolean>(false)//ここ本当はfalse
   const [loadState,setLoadState] = useState<boolean>(false)//ここ本当はfalse
@@ -27,7 +34,9 @@ function App() {
   const [mkPostTitle,setMkPostTitle] = useState("")
   const [cookies,setCookie] = useCookies()
   const [firstSocketFlg,setFirstSocketFlg] = useState<boolean>(false)
-  const [nowJoinPageId,setNowJoinPageId] = useState<string>("")
+  const [nowJoinPageId,setNowJoinPageId] = useState<pageStateType>({page:"",value:""})
+  const [beforeJoinPageId,setBeforeJoinPageId] = useState<pageStateType>({page:"",value:""})
+
   useEffect(()=>{
     if (loginState){
       const status = analyzeStatus(window)
@@ -35,7 +44,18 @@ function App() {
     }
   },[loginState])
   useEffect(()=>{
-    alert("je;;p")
+    if (beforeJoinPageId.page === "thread" && beforeJoinPageId !== nowJoinPageId){
+      socket.emit("leave_thread_room",beforeJoinPageId.value)
+    }else if (beforeJoinPageId.page == "home" && beforeJoinPageId !== nowJoinPageId){
+      socket.emit("leave_room",beforeJoinPageId.value)
+    }
+    if (nowJoinPageId.page == "thread" && beforeJoinPageId !== nowJoinPageId){
+      setBeforeJoinPageId(nowJoinPageId)
+      socket.emit("join_thread_room",nowJoinPageId.value)
+    }else if (nowJoinPageId.page == "home" && beforeJoinPageId !== nowJoinPageId){
+      setBeforeJoinPageId(nowJoinPageId)
+      socket.emit("join_room",nowJoinPageId.value)
+    }
   },[nowJoinPageId])
   socket.on("user_connection_res",(data)=>{setFirstSocketFlg(true)})
   return (
@@ -60,6 +80,7 @@ function App() {
                       <Route path='/jointhread' element={<JoinedThread/>}/>
                       <Route path='/thread/:id' element={<ThreadPage/>}/>
                       <Route path='/profile/:id' element={<ProfileSeMain/>}/>
+                      <Route path='/move/profile/:id' element={<MoveProfile/>}/>
                       <Route path='/search/:word' element={<SearchPage/>}/>
                   </Routes>
                   {loginState && firstSocketFlg?<RightBar/>:<></>}

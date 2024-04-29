@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./ThreadPageMain.css"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,7 +15,7 @@ import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import RepryBar from './RepryPost/RepryBar/RepryBar';
-import { socket } from '../../../App';
+import { nowJoinPageSetFn, socket } from '../../../App';
 function ThreadPageMain() {
   console.log("再描画されました２")
   interface ThreadPostModule{
@@ -47,8 +47,10 @@ function ThreadPageMain() {
   const MainthreadId = useParams().id
   const [doneFirstScroll,setDoneFirstScroll] = useState<boolean>(false)
   const [threadTitle,setThreadTitle] = useState<string>("")
+  const setNowPageId:any = useContext(nowJoinPageSetFn)
+
   useEffect(()=>{
-    socket.emit("join_thread_room",{threadId:MainthreadId})
+    setNowPageId({page:"thread",value:MainthreadId})
     axios.post("http://localhost:5000/thread/data/getthreadinfo",{
       threadId:MainthreadId?.toString()
     }).then((res)=>{
@@ -57,6 +59,7 @@ function ThreadPageMain() {
       socket.emit("change_status",{userId:cookies.userId,status:`${res.data.title}を閲覧中`})
     }).catch((e)=>{})
   },[])
+
   useEffect(()=>{
     const scrollContainer = threadListScroll.current;
     console.log(threadListScroll.current.scrollHeight)

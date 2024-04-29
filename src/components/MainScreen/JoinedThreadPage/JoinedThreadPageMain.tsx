@@ -7,6 +7,8 @@ import { useCookies } from "react-cookie";
 import LoadAni from "../../amimations/Load/LoadAni";
 import { getThreadInterface } from "../../../interface/getThreadInterface";
 import { socket } from "../../../App";
+import { threadId } from "worker_threads";
+import { homeScreenSocketMain } from "../Home/SocketFun/socketMain";
 
 function JoinedThreadPageMain(){
     const [cookies,setCookie] = useCookies()
@@ -25,6 +27,10 @@ function JoinedThreadPageMain(){
                 pass:cookies.pass.toString(),
                 timeStamp:nowTimeStamp
             }).then((res:AxiosResponse<getThreadInterface[]>)=>{
+                const threadIdList:string[] = res.data.map((i)=>{
+                    return i.theradId
+                })
+                socket.emit("join_some_threads",{threadId:threadIdList})
                 if (res.data.length === 0){
                     setAllLoadDone(true)
                     setLoadStartNextPage(false)
@@ -39,6 +45,7 @@ function JoinedThreadPageMain(){
     }
     useEffect(()=>{
         socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
+
         axios.post("http://localhost:5000/thread/data/getjointhread",{
             userId:cookies.userId,
             pass:cookies.pass.toString(),
@@ -46,11 +53,39 @@ function JoinedThreadPageMain(){
         }).then((res:AxiosResponse<getThreadInterface[]>)=> {
             setJoinThreads(res.data)
             setNowTimeStamp(res.data[res.data.length-1].createdAt)
+            const threadIdList:string[] = res.data.map((i)=>{
+                return i.theradId
+            })
+            socket.emit("join_some_threads",{threadId:threadIdList})
             setLoadDoneJoinFlg(true)
         }).catch((error:any)=>{
             console.log(error)
         })
     },[])
+    useEffect(()=>{
+        socket.on("add_join_num",(data)=>{
+            let mainThread = [...joinThreads]
+            const targetIndex = mainThread.findIndex((i)=>i.theradId === data.threadId)
+            if (targetIndex !== -1){
+                mainThread[targetIndex] = {...mainThread[targetIndex],joinNum:mainThread[targetIndex].joinNum+1}
+                console.log(mainThread[targetIndex])
+                setJoinThreads(mainThread)
+            }
+    
+        })
+        socket.on("delete_join_num",(data)=>{
+            let mainThread = [...joinThreads]
+            const targetIndex = mainThread.findIndex((i)=>i.theradId === data.threadId)
+            if (targetIndex !== -1){
+                mainThread[targetIndex] = {...mainThread[targetIndex],joinNum:mainThread[targetIndex].joinNum-1}
+                console.log(mainThread[targetIndex])
+                setJoinThreads(mainThread)
+            }
+        })
+        socket.on("changeThreadInfo",(data:{id:string,type:string,data:JSON})=>{
+            homeScreenSocketMain(data,joinThreads,setJoinThreads,cookies.userId)
+          })
+    },[joinThreads])
     return(
         <div className="JoinThreadPageMain">
             <div className="JoinThreadPageTop">

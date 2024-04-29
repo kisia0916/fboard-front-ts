@@ -2,8 +2,9 @@ import React from 'react'
 import "./Tags.css"
 import TagIcon from '@mui/icons-material/Tag';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { Link } from 'react-router-dom';
 
-function Tags(props:{bottomFlg?:boolean,Tagtext:string}) {
+function Tags(props:{bottomFlg?:boolean,Tagtext:string,postNum:number}) {
     let tagStyle:string = "0 0 0 0"
     let tagStyle2:string = ""
     if(props.bottomFlg){
@@ -11,16 +12,18 @@ function Tags(props:{bottomFlg?:boolean,Tagtext:string}) {
         tagStyle2 = "none"
     }
     return (
-        <div className='TagsMain' style={{borderRadius:tagStyle,border:tagStyle2}}>
-            <div className='TagSpaceLeft'>
-                <TagIcon className='TagIcon'/>
-                <span className='TagTitle'>{props.Tagtext}</span>
+        <Link to={`/search/${props.Tagtext}`}>
+            <div className='TagsMain' style={{borderRadius:tagStyle,border:tagStyle2}}>
+                <div className='TagSpaceLeft'>
+                    <TagIcon className='TagIcon'/>
+                    <span className='TagTitle'>{props.Tagtext}</span>
+                </div>
+                <div className='TagNumWarpp'>
+                    <ChatBubbleIcon className='TagNumIcon' style={{fontSize:"120%"}}/>
+                    <span className='TagNumText'>{props.postNum}</span>
+                </div> 
             </div>
-            <div className='TagNumWarpp'>
-                <ChatBubbleIcon className='TagNumIcon' style={{fontSize:"120%"}}/>
-                <span className='TagNumText'>10</span>
-            </div> 
-        </div>
+        </Link>
     )
 }
 

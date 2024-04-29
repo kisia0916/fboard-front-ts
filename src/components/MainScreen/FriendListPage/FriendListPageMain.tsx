@@ -13,6 +13,7 @@ function FriendListPageMain() {
     const [friendList,setFriendList] = useState<any>()
     const setNowPageId:any = useContext(nowJoinPageSetFn)
     useEffect(()=>{
+    setNowPageId({page:"friendList",value:""})
     socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
     axios.post("http://localhost:5000/user/profile/getfriend",{
         userId:cookies.userId

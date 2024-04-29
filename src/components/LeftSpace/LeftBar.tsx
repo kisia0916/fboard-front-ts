@@ -21,14 +21,14 @@ function LeftBar() {
         <PageButtons buttonText='Notification' icon={<NotificationsIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link='/home'/>
         <PageButtons buttonText='Friends' icon={<PeopleAltIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link='/friendlist'/>
         <PageButtons buttonText='JoinThread' icon={<DownloadDoneIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link='/jointhread'/>
-        <PageButtons buttonText='LikeBlog' icon={<DownloadDoneIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link='/home'/>
-        <PageButtons buttonText='Profile' icon={<AccountBoxIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link={`/profile/${cookies.name}`}/>
+        {/* <PageButtons buttonText='LikeBlog' icon={<DownloadDoneIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link='/home'/> */}
+        <PageButtons buttonText='Profile' icon={<AccountBoxIcon style={{fontSize:"175%"}} className='LeftButtonIcon'/>} link={`/move/profile/${cookies.name}`}/>
 
 
         <div className='LeftSpaceLine'></div>
         <PagePostButtons/>
       </div>
-      <UserInfoSpace userName={"fumi"}/>
+      <UserInfoSpace userName={cookies.name}/>
     </div>
   )
 }

@@ -13,8 +13,9 @@ import LoadAni from '../../amimations/Load/LoadAni';
 import LoadMiniMain from '../../amimations/LoadMini/LoadMiniMain';
 import { getThreadInterface } from '../../../interface/getThreadInterface';
 import { socket } from '../../../App';
+import { homeScreenSocketMain } from '../Home/SocketFun/socketMain';
 
-function ProfileSeMain() {
+function ProfileSeMain(props:any) {
   const profileImgRef = useRef<any>()
   const [headerImgWidth,setHeaderImgWidth] = useState<any>()
   const [cookies,setCookie] = useCookies()
@@ -32,6 +33,7 @@ function ProfileSeMain() {
   const [followButtonText,setFollorButtonText] = useState<string>("") 
   const profileUserName:string = useParams().id as string
   const [friendReqLoadFlg,setFriendReqFlg] = useState<boolean>(false)
+  const [userStatus,setUserStatus] = useState<"online"|"offline"|"">("")
 
   const scrollRef = useRef(null)
   const [loadStartNextPage,setLoadStartNextPage] = useState<boolean>(false) 
@@ -45,6 +47,10 @@ function ProfileSeMain() {
             userId:cookies.userId,
             timeStamp:nowTimeStamp
         }).then((res:AxiosResponse<getThreadInterface[]>)=>{
+          const threadIdList:string[] = res.data.map((i)=>{
+            return i.theradId
+        })
+        socket.emit("join_some_threads",{threadId:threadIdList})
             if (res.data.length === 0){
                 setAllLoadDone(true)
                 setLoadStartNextPage(false)
@@ -60,8 +66,6 @@ function ProfileSeMain() {
 
   const pushFollow = ()=>{
     if (!friendReqLoadFlg){
-      console.log(cookies.pass)
-
       if(followButtonText === "Friend Reqest"){
       setFriendReqFlg(true)
 
@@ -107,9 +111,13 @@ function ProfileSeMain() {
     }
   }
   useEffect(()=>{
+    socket.on("res_check_online",(data)=>{
+      setUserStatus(data.status)
+    })
+  },[userStatus])
+  useEffect(()=>{
     setHeaderImgWidth(profileImgRef.current.offsetWidth)
-    console.log(profileUserName)
-    console.log(cookies.id)
+    socket.emit("check_online",{find_name:profileUserName})
     socket.emit("change_status",{userId:cookies.userId,status:"Fboardを探索中"})
     axios.post("http://localhost:5000/user/profile/getprofiledata",{
       userName:profileUserName,
@@ -137,12 +145,17 @@ function ProfileSeMain() {
     }).catch(()=>{})
 
   },[])
+  
   useEffect(()=>{
     if(profileLoadDone){
       axios.post("http://localhost:5000/user/profile/getmythread",{
         userId:profileUserId,
         timeStamp:""
       }).then((res:AxiosResponse<getThreadInterface[]>)=>{
+        const threadIdList:string[] = res.data.map((i)=>{
+          return i.theradId
+      })
+      socket.emit("join_some_threads",{threadId:threadIdList})
         console.log(res.data)
         setMyPostList(res.data)
         setMyPostLoadDone(true)
@@ -174,6 +187,31 @@ function ProfileSeMain() {
     }
   },[myPostLoadDone])
 
+  useEffect(()=>{
+    socket.on("add_join_num",(data)=>{
+        let mainThread = [...myPostList]
+        const targetIndex = mainThread.findIndex((i)=>i.theradId === data.threadId)
+        if (targetIndex !== -1){
+            mainThread[targetIndex] = {...mainThread[targetIndex],joinNum:mainThread[targetIndex].joinNum+1}
+            console.log(mainThread[targetIndex])
+            setMyPostList(mainThread)
+        }
+
+    })
+    socket.on("delete_join_num",(data)=>{
+        let mainThread = [...myPostList]
+        const targetIndex = mainThread.findIndex((i)=>i.theradId === data.threadId)
+        if (targetIndex !== -1){
+            mainThread[targetIndex] = {...mainThread[targetIndex],joinNum:mainThread[targetIndex].joinNum-1}
+            console.log(mainThread[targetIndex])
+            setMyPostList(mainThread)
+        }
+    })
+    socket.on("changeThreadInfo",(data:{id:string,type:string,data:JSON})=>{
+        homeScreenSocketMain(data,myPostList,setMyPostList,cookies.userId)
+      })
+},[myPostList])
+
   return (
     <div className='ProfileSeMain'>
         <div className='ProfileSeTopBar'>
@@ -181,8 +219,8 @@ function ProfileSeMain() {
               <ArrowBackIosNewIcon className='ProfileSeBackIcon' style={{fontSize:"150%"}}/>
               <span className='ProfileSeTopBarUserName'>{userName}</span>
               <div className='ProfileUserState'>
-                  <div className='ProfileUserStateIcon'></div>
-                  <span className='ProfileUserStateText'>オンライン</span>
+                  {userStatus === "online"?<div className='ProfileUserStateIcon' style={{backgroundColor:"#edff49"}}></div>:<div className='ProfileUserStateIcon' style={{backgroundColor:"#868686"}}></div>}
+                  <span className='ProfileUserStateText'>{userStatus}</span>
               </div>
           </div>
           <div className='ProfileSeTopBarRight'>
@@ -206,7 +244,7 @@ function ProfileSeMain() {
           <div className='ProfileSeMainSpace'>
             <div className='ProfileSeMainProfileSpace'>
               <div className='ProfileSeMainProfileSpaceWarpp'>
-                <span className='ProfileSeMainProfileSpaceText'>{"こんにちは。開発中です"}</span>
+                <span className='ProfileSeMainProfileSpaceText'>{profile}</span>
               </div>
               <div className='ProfileSeMainProfileSpaceSendMessIconWarpp'>
                 <EmailIcon className='ProfileSeMainProfileSpaceSendMessIcon' style={{fontSize:"180%"}}/>
@@ -240,7 +278,7 @@ function ProfileSeMain() {
                 }
               })
               
-              return <ThreadMain threadTitle={i.title} threadId={i.theradId} joinNum={i.joinNum} userNum={30} postNum={i.postNum} createUserName={i.userName} createdDate={i.createdAt} tagList={i.tags} titleIcon={i.threadPhoto} userIcon='' isJoined={checkFlg}/>
+              return <ThreadMain threadTitle={i.title} threadId={i.theradId} joinNum={i.joinNum} userNum={30} postNum={i.messNum}createUserName={i.userName} createdDate={i.createdAt} tagList={i.tags} titleIcon={i.threadPhoto} userIcon='' isJoined={checkFlg}/>
             }):<LoadAni size='30px' top='30px'/>}
             {/* <ThreadMain threadTitle='fboradスレッド読み込みテスト' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["プログラミング","卒論","開発テスト"]} titleIcon='http://localhost:5000/public/img/thread/c4c24eae-8088-4bc2-a707-bdc6fa420b83.png' userIcon='' isJoined={false}/>
             <ThreadMain threadTitle='SNSを個人で開発してみた' threadId='test' joinNum={10} userNum={30} postNum={30} createUserName='kisia' createdDate='2-2-2t' tagList={["Node.js","React","プログラミング"]} titleIcon='http://localhost:3000/photos/zbnU2dcD_400x400.jpg' userIcon='' isJoined={false}/>

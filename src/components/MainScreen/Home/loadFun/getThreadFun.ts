@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios"
+import { socket } from "../../../../App"
 
 interface getThreadInterface{
     permissionUser: string,
@@ -24,6 +25,10 @@ export const getThreadList = (timeStamp:string,nowData:any,updateFun:any,setThre
         const getList:getThreadInterface[] = res.data.map((i)=>{
           return i
         })
+        const threadIdList = res.data.map((i)=>{
+            return i.theradId
+        }) 
+        socket.emit("join_some_threads",{threadId:threadIdList})
         updateFun(nowData.concat(getList))
         setThreadDone(true)
         if(setNextTimeStampDone){
