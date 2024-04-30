@@ -18,10 +18,18 @@ function FriendListPageMain() {
     axios.post("http://localhost:5000/user/profile/getfriend",{
         userId:cookies.userId
     }).then((res)=>{
-        setFriendList(res.data)
+        // setFriendList(res.data)
+        setFriendList([{userId:"a",name:"a",icon:"a",status:"a"}])
         setFriendLoadDone(true) 
     }).catch(()=>{
 
+    })
+  },[])
+  useEffect(()=>{
+    socket.on("friend_connection",(data:{userId:string,name:string,icon:string,status:string})=>{
+        alert("hello")
+        const newFriendList = [...friendList,data]
+        setFriendList(newFriendList)
     })
   },[])
   return (
